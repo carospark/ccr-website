@@ -1,0 +1,805 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Center for Climate Resilience</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  /* Penn brand palette */
+  --penn-blue:#011F5B;
+  --penn-blue-dark:#011838;
+  --penn-red:#990000;
+  --penn-red-dark:#6E1717;
+  --accent-blue:#2C6E91;
+  --accent-blue-light:#82AFD3;
+  --accent-light-blue:#E0EBF5;
+  --accent-grey:#595959;
+  --accent-white:#FFFFFF;
+
+  /* Functional roles — Accent Dark Blue base, Penn Blue header, lighter cards */
+  --bg:#011838;             /* Accent Dark Blue — primary page background */
+  --bg-card:#1A3D7A;        /* Lighter accent blue — card surface (clear contrast) */
+  --bg-surface:#143568;     /* Slightly darker than card, between bg and bg-card */
+
+  /* Section background blocks (full-bleed) */
+  --section-penn-blue:#011F5B;
+  --section-dark-blue:#011838;   /* Accent Dark Blue */
+  --section-light-blue:#E0EBF5;  /* Accent Light Blue — light section, dark text */
+  --section-dark-red:#6E1717;    /* Accent Dark Red */
+
+  --accent:#82AFD3;         /* Accent Blue — light blue accent */
+  --accent-bright:#B8D2E6;  /* hover/highlight */
+  --accent-deep:#2C6E91;    /* darker blue accent */
+  --terra:#990000;          /* Penn Red */
+  --penn-red-dark:#6E1717;  /* Accent Dark Red */
+
+  --text-primary:#FFFFFF;
+  --text-secondary:#C9D4E2;
+  --text-tertiary:#8FA0B5;
+
+  /* Text colors for use on the light-blue section */
+  --text-on-light:#011838;
+  --text-on-light-secondary:#2C6E91;
+
+  --border:#1A3D7A;
+  --border-light:#2C5A9E;
+
+  --font-sans:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  --font-serif:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+}
+html{scroll-behavior:smooth}
+body{font-family:var(--font-sans);color:var(--text-primary);background:var(--bg);-webkit-font-smoothing:antialiased}
+a{color:var(--accent-bright);text-decoration:none;transition:color .2s}
+a:hover{color:#fff}
+h1,h2,h3,h4{font-family:var(--font-sans);font-weight:700;color:var(--text-primary);letter-spacing:-0.01em}
+
+/* ── Nav ── */
+.nav{padding:1.25rem 2rem;position:fixed;top:0;left:0;right:0;z-index:100;
+  display:flex;align-items:center;justify-content:space-between;
+  background:var(--section-penn-blue);border-bottom:1px solid var(--accent-deep)}
+.nav__brand{display:flex;align-items:center;gap:0.65rem;text-decoration:none;cursor:pointer}
+.nav__logo{height:38px;width:auto;display:block}
+.nav__name{font-family:var(--font-sans);font-size:1rem;font-weight:600;color:#fff}
+.nav__links{display:flex;gap:2rem;list-style:none}
+.nav__links a{color:rgba(255,255,255,0.7);font-size:0.78rem;font-weight:600;letter-spacing:0.05em;text-transform:uppercase;transition:color .2s;cursor:pointer;font-family:var(--font-sans)}
+.nav__links a:hover{color:#fff}
+.nav__links a.active{color:var(--accent-bright)}
+
+/* ── Hero ── */
+.hero{position:relative;height:100vh;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.hero__media{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0}
+.hero__overlay{position:absolute;inset:0;z-index:1;
+  background:linear-gradient(180deg,
+    rgba(1,31,91,0.70) 0%,
+    rgba(1,31,91,0.35) 40%,
+    rgba(1,31,91,0.30) 65%,
+    rgba(1,31,91,0.85) 90%,
+    rgba(1,24,56,1) 100%)}
+.hero__content{position:relative;z-index:2;text-align:center;max-width:760px;padding:0 2rem;margin-top:-8vh}
+.hero__eyebrow{font-size:0.78rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--accent-bright);margin-bottom:1.25rem;
+  opacity:0;animation:fadeUp .8s ease .3s forwards}
+.hero h1{font-family:var(--font-sans);font-weight:700;font-size:3.6rem;line-height:1.1;letter-spacing:-0.025em;color:#fff;margin-bottom:1.5rem;
+  text-shadow:0 2px 30px rgba(0,0,0,0.4);
+  opacity:0;animation:fadeUp .8s ease .5s forwards}
+.hero p{font-family:var(--font-serif);font-size:1.2rem;line-height:1.7;color:rgba(255,255,255,0.85);max-width:560px;margin:0 auto 2.5rem;
+  opacity:0;animation:fadeUp .8s ease .7s forwards}
+.hero__accent{width:48px;height:3px;background:var(--terra);border-radius:2px;margin:0 auto 2.5rem;
+  opacity:0;animation:fadeUp .8s ease .9s forwards}
+.hero__scroll{color:rgba(255,255,255,0.55);font-size:0.72rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;display:flex;flex-direction:column;align-items:center;gap:0.5rem;cursor:pointer;
+  opacity:0;animation:fadeUp .8s ease 1.1s forwards}
+.hero__scroll svg{width:18px;height:18px;stroke:rgba(255,255,255,0.55);fill:none;stroke-width:2;animation:bob 2.5s ease-in-out infinite}
+@keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(6px)}}
+
+/* ── Pages ── */
+.page{display:none;padding-top:70px;min-height:100vh}
+.page.active{display:block}
+.ps{padding:7rem 0}
+.ps--surface{background:var(--section-dark-blue)}
+.ps--light{background:var(--section-light-blue);color:var(--text-on-light)}
+.ps--red{background:var(--section-dark-red)}
+.ps:first-child{padding-top:4rem}
+
+/* Light section — invert text colors */
+.ps--light h2,.ps--light h3,.ps--light h4{color:var(--text-on-light)}
+.ps--light .lead{color:var(--text-on-light)}
+.ps--light .lead em{color:var(--accent-deep)}
+.ps--light p{color:var(--text-on-light)}
+.ps--light .divider{background:var(--terra)}
+.ps--light .stat__number{color:var(--terra)}
+.ps--light .stat__label{color:var(--text-on-light-secondary)}
+.ps--light .card{background:#fff;border:1px solid #C9D6E3}
+.ps--light .card h3{color:var(--text-on-light)}
+.ps--light .card p{color:var(--text-on-light-secondary)}
+.ps--light .card__tag{color:#fff;background:var(--accent-deep)}
+.ps--light .card:hover{border-color:var(--penn-red-dark)}
+.ps--light .partner{background:#fff;border:1px solid #C9D6E3}
+.ps--light .partner h3{color:var(--text-on-light)}
+.ps--light .partner p{color:var(--text-on-light-secondary)}
+.ps--light .partner__icon{background:var(--section-penn-blue);color:#fff;border:1px solid var(--section-penn-blue)}
+.ps--light .partner:hover{border-color:var(--penn-red-dark)}
+
+/* Red section — text stays white but tweak accent colors */
+.ps--red .divider{background:var(--accent-bright)}
+.ps--red .lead em{color:var(--accent-bright)}
+.ps--red .stat__number{color:#fff}
+.ps--red .card{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.15)}
+.ps--red .card:hover{border-color:var(--accent-bright)}
+.ps--red .card__tag{color:#fff;background:rgba(0,0,0,0.25)}
+.ps--red .partner{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.15)}
+.ps--red .partner:hover{border-color:var(--accent-bright)}
+.ps--red .partner__icon{background:rgba(0,0,0,0.25);color:#fff;border:1px solid rgba(255,255,255,0.2)}
+
+.container{max-width:1080px;margin:0 auto;padding:0 2rem}
+.lead{font-family:var(--font-serif);font-size:1.15rem;color:var(--text-secondary);line-height:1.75;max-width:680px}
+.lead em{font-style:italic;color:var(--accent-bright)}
+h2{font-size:2.1rem;line-height:1.2;margin-bottom:1rem;font-weight:700;letter-spacing:-0.02em}
+h3{font-size:1.25rem;line-height:1.3;margin-bottom:0.5rem;font-weight:600}
+p{margin-bottom:1rem;font-family:var(--font-serif)}
+.divider{width:36px;height:3px;background:var(--terra);border-radius:1px;margin-bottom:1.5rem}
+
+/* ── Cards ── */
+.card-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem}
+.card{background:var(--bg-card);border:1px solid var(--border-light);border-radius:10px;padding:2rem;transition:border-color .25s,transform .25s}
+.card:hover{border-color:var(--accent);transform:translateY(-2px)}
+.card__tag{display:inline-block;font-family:var(--font-sans);font-size:0.72rem;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:var(--accent-bright);background:rgba(0,0,0,0.25);padding:0.25rem 0.75rem;border-radius:4px;margin-bottom:1rem}
+.card h3{color:var(--text-primary);font-family:var(--font-sans)}
+.card p{color:var(--text-secondary);font-family:var(--font-serif);font-size:0.97rem;line-height:1.65;margin:0}
+
+/* ── Stats / Policy ── */
+.stats{display:flex;gap:3rem;flex-wrap:wrap;margin-top:2.5rem}
+.stat__number{font-family:var(--font-sans);font-weight:800;font-size:3.4rem;color:var(--terra);letter-spacing:-0.025em;line-height:1.1}
+.stat__label{font-family:var(--font-sans);font-size:0.88rem;font-weight:500;color:var(--text-secondary);margin-top:0.25rem}
+
+/* ── Team ── */
+.team-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:2rem}
+.team-member{text-align:center;cursor:pointer}
+.team-member__photo{width:120px;height:120px;border-radius:50%;background:var(--bg-card);margin:0 auto 1rem;border:2px solid var(--border-light);display:flex;align-items:center;justify-content:center;color:var(--text-secondary);font-family:var(--font-sans);font-size:1.4rem;font-weight:600;transition:border-color .25s}
+.team-member:hover .team-member__photo{border-color:var(--accent)}
+.team-member h3{font-size:1.05rem;margin-bottom:0.2rem;font-family:var(--font-sans);font-weight:600}
+.team-member__role{font-family:var(--font-sans);font-size:0.8rem;color:var(--accent-bright);font-weight:500;margin-bottom:0.5rem}
+.team-bio{display:none;background:var(--bg-card);border:1px solid var(--border-light);border-radius:10px;padding:2.5rem;margin-top:2rem;margin-bottom:1rem;text-align:left;grid-column:1/-1}
+.team-bio.active{display:flex;gap:2rem;align-items:flex-start;animation:fadeUp .3s ease}
+.team-bio__img{width:140px;min-width:140px;height:140px;border-radius:50%;object-fit:cover;border:2px solid var(--border-light)}
+.team-bio__text h3{font-size:1.3rem;margin-bottom:0.25rem;font-family:var(--font-sans)}
+.team-bio__text .team-member__role{font-size:0.85rem;margin-bottom:1rem}
+.team-bio__text p{color:var(--text-secondary);font-family:var(--font-serif);font-size:0.95rem;line-height:1.7;margin-bottom:0.75rem}
+.team-bio__close{position:absolute;top:1rem;right:1.25rem;background:none;border:none;color:var(--text-secondary);font-size:1.5rem;cursor:pointer;line-height:1}
+.team-bio__close:hover{color:var(--text-primary)}
+@media(max-width:640px){.team-bio.active{flex-direction:column;align-items:center;text-align:center}.team-bio__img{margin-bottom:1rem}}
+
+/* ── Partners ── */
+.partner-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1.5rem}
+.partner{display:flex;align-items:flex-start;gap:1rem;padding:1.5rem;background:var(--bg-card);border:1px solid var(--border-light);border-radius:10px;transition:border-color .25s}
+.partner:hover{border-color:var(--accent)}
+.partner__icon{width:44px;height:44px;min-width:44px;border-radius:8px;background:rgba(0,0,0,0.25);border:1px solid var(--accent-deep);display:flex;align-items:center;justify-content:center;color:var(--accent-bright);font-family:var(--font-sans);font-weight:600;font-size:0.78rem}
+.partner h3{font-size:1.05rem;margin-bottom:0.25rem;font-family:var(--font-sans)}
+.partner p{font-family:var(--font-serif);font-size:0.92rem;color:var(--text-secondary);margin:0;line-height:1.6}
+
+/* ── Fellow chip ── */
+.fellow{padding:1rem;background:var(--bg-card);border:1px solid var(--border-light);border-radius:8px}
+.fellow__name{font-family:var(--font-sans);font-weight:500;font-size:0.95rem}
+.fellow__role{font-family:var(--font-sans);font-size:0.78rem;color:var(--accent-bright);margin-top:0.2rem}
+
+/* ── Engagement cards ── */
+.eng-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:1.5rem}
+.eng-card{background:var(--bg-card);border:1px solid var(--border-light);border-radius:10px;text-decoration:none;transition:border-color .25s,transform .25s;display:block;overflow:hidden}
+.eng-card:hover{border-color:var(--accent);transform:translateY(-2px);color:var(--text-primary)}
+.eng-card__img{width:100%;height:180px;object-fit:cover;display:block;background:var(--bg)}
+.eng-card__body{padding:1.75rem 2rem 2rem}
+.eng-card__tag{display:inline-block;font-family:var(--font-sans);font-size:0.7rem;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:#fff;background:var(--penn-red-dark);padding:0.25rem 0.75rem;border-radius:4px;margin-bottom:0.75rem}
+.eng-card h3{color:var(--text-primary);font-family:var(--font-sans);font-size:1.1rem;font-weight:600;line-height:1.35;margin-bottom:0.5rem}
+.eng-card__date{font-family:var(--font-sans);font-size:0.8rem;color:var(--accent-bright);font-weight:600;margin-bottom:0.75rem}
+.eng-card p{color:var(--text-secondary);font-family:var(--font-serif);font-size:0.93rem;line-height:1.65;margin:0}
+
+/* ── Blog ── */
+.blog-post{margin-bottom:4rem;padding-bottom:4rem;border-bottom:1px solid var(--border-light)}
+.blog-post:last-child{border-bottom:none}
+.blog-post__date{display:inline-block;font-family:var(--font-sans);font-size:0.75rem;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:#fff;background:var(--penn-red-dark);padding:0.35rem 0.85rem;border-radius:4px;margin-bottom:1rem}
+.blog-post h3{font-size:1.55rem;margin-bottom:1rem;font-family:var(--font-sans);font-weight:700}
+.blog-post p{color:var(--text-secondary);font-family:var(--font-serif);font-size:0.97rem;max-width:680px;line-height:1.75}
+.ps--practice .blog-post{border-bottom-color:rgba(110,23,23,.16)}
+.ps--practice .blog-post h3{color:var(--text-on-light)}
+.ps--practice .blog-post p{color:var(--text-on-light-secondary)}
+
+/* ── Footer ── */
+.footer{padding:2.5rem 0;border-top:1px solid var(--border-light);font-family:var(--font-sans);font-size:0.82rem;color:var(--text-tertiary)}
+.footer .container{display:flex;justify-content:space-between;align-items:center}
+.footer a{color:var(--text-secondary)}
+.footer a:hover{color:var(--accent-bright)}
+
+@media(max-width:768px){
+  .hero h1{font-size:2.4rem}
+  .ps{padding:4rem 0}
+  .nav__name{display:none}
+  .nav__links{gap:1rem}
+  .nav__links a{font-size:0.7rem}
+  .stats{gap:2rem}
+  .footer .container{flex-direction:column;gap:0.75rem;text-align:center}
+}
+
+/* ── Policy impact map ── */
+.policy-map{position:relative;max-width:790px;margin:2rem auto 0;border-radius:12px;overflow:hidden;background:var(--section-light-blue)}
+.policy-map__img{display:block;width:100%;height:auto;mix-blend-mode:multiply}
+.city-pin{position:absolute;transform:translate(-50%,-50%);width:13px;height:13px;border-radius:50%;background:#000;border:2px solid #fff;box-shadow:0 0 0 2px rgba(0,0,0,0.45),0 2px 6px rgba(0,0,0,0.35);z-index:2}
+.city-pin::after{content:"";position:absolute;inset:-6px;border-radius:50%;border:2px solid rgba(0,0,0,0.35);animation:pinPulse 2.4s ease-out infinite}
+@keyframes pinPulse{0%{transform:scale(0.8);opacity:0.9}100%{transform:scale(2.0);opacity:0}}
+.city-label{position:absolute;font-family:var(--font-sans);font-size:0.7rem;font-weight:700;letter-spacing:0.04em;text-transform:uppercase;color:#011838;background:rgba(255,255,255,0.94);padding:0.2rem 0.48rem;border-radius:3px;box-shadow:0 1px 4px rgba(0,0,0,0.22);white-space:nowrap;z-index:3;pointer-events:none}
+.policy-map__caption{font-family:var(--font-sans);font-size:0.72rem;font-style:italic;color:var(--text-on-light-secondary);text-align:center;margin:.7rem auto 0;max-width:680px;line-height:1.55}
+@media(max-width:640px){
+  .city-pin{width:11px;height:11px}
+  .city-label{font-size:0.62rem;padding:0.16rem 0.4rem}
+}
+
+/* ── Our Work section ── */
+.ps--practice{background:#F7F2EC;color:var(--text-on-light);border-top:1px solid rgba(153,0,0,.14);border-bottom:1px solid rgba(153,0,0,.14)}
+.ps--practice h2,.ps--practice h3,.ps--practice h4{color:var(--text-on-light)}
+.ps--practice p,.ps--practice .lead{color:var(--text-on-light-secondary)}
+.ps--practice .eyebrow{color:var(--accent-deep)}
+.ps--light .eyebrow{color:var(--accent-deep)}
+.eyebrow{font-family:var(--font-sans);font-size:.78rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--accent-bright);margin-bottom:1rem}
+.section-head{display:flex;align-items:flex-end;justify-content:space-between;gap:2rem;margin-bottom:3rem}
+.section-head .lead{max-width:620px}
+
+/* Work hero */
+.work-hero{position:relative;overflow:hidden;padding:7.5rem 0 6.5rem;min-height:560px;display:flex;align-items:center;background-image:linear-gradient(135deg,rgba(1,31,91,.75),rgba(1,24,56,.75) 55%,rgba(110,23,23,.75)),url('assets/green-building.jpg');background-size:cover;background-position:center;background-attachment:fixed}
+.work-hero::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 15% 20%,rgba(130,175,211,.18),transparent 36%),radial-gradient(circle at 90% 30%,rgba(153,0,0,.18),transparent 38%);pointer-events:none}
+.work-hero__copy{position:relative;z-index:1;max-width:760px}
+.work-hero__copy h1{font-family:var(--font-sans);font-size:3.45rem;line-height:1.08;letter-spacing:-.035em;margin-bottom:1.35rem;color:#fff;font-weight:700;text-shadow:0 2px 24px rgba(0,0,0,.35)}
+.hero__actions{display:flex;flex-wrap:wrap;gap:1rem;margin-top:2rem}
+.work-button{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:.75rem 1.15rem;border-radius:6px;border:1px solid var(--accent);font-size:.85rem;font-weight:700;letter-spacing:.02em;color:var(--accent-bright);cursor:pointer;font-family:var(--font-sans)}
+.work-button:hover{background:var(--accent);color:var(--bg)}
+.work-button--solid{background:var(--terra);border-color:var(--terra);color:#fff}
+.work-button--solid:hover{background:var(--penn-red-dark);border-color:var(--penn-red-dark);color:#fff}
+
+/* Pipeline */
+.pipeline{position:relative;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:2.4rem;padding-top:3.2rem;margin-top:1rem}
+.pipeline::before{content:"";position:absolute;top:1.2rem;left:1.1rem;right:1.1rem;height:2px;background:linear-gradient(90deg,var(--terra),var(--accent-bright));opacity:.75}
+.pipeline__step{position:relative;padding-right:1rem}
+.pipeline__step::before{content:attr(data-step);position:absolute;top:-3.2rem;left:0;width:42px;height:42px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:var(--terra);color:#fff;font-size:.78rem;font-weight:800;box-shadow:0 0 0 8px var(--bg)}
+.pipeline__tag{font-size:.72rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--accent-bright);margin-bottom:.7rem}
+.pipeline__step h3{font-size:1.25rem;margin-bottom:.65rem;font-family:var(--font-sans)}
+.pipeline__step p{font-size:.98rem;line-height:1.7;max-width:310px;color:var(--text-secondary)}
+
+/* Focus (human capital) layout */
+.focus-layout{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(280px,.95fr);gap:4rem;align-items:start}
+.focus-layout p{color:var(--text-on-light-secondary);max-width:660px}
+.focus-list{display:grid;gap:1.6rem;border-left:2px solid #B7CADB;padding-left:1.6rem;margin-top:.35rem}
+.focus-list__kicker{font-family:var(--font-sans);font-size:.72rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--penn-red-dark);margin-bottom:.2rem;padding-bottom:.9rem;border-bottom:1px solid rgba(1,24,56,.12)}
+.focus-item{position:relative}
+.focus-item::before{content:"";position:absolute;left:-1.97rem;top:.35rem;width:11px;height:11px;border-radius:50%;background:var(--terra);box-shadow:0 0 0 5px var(--section-light-blue)}
+.focus-item h3{font-size:1.08rem;margin-bottom:.35rem;font-family:var(--font-sans)}
+.focus-item p{font-size:.94rem;line-height:1.6;margin:0}
+
+/* Practice list */
+.practice-intro{max-width:780px;margin-bottom:3rem}
+.practice-list{display:grid;gap:1.2rem;max-width:910px}
+.practice-row{display:grid;grid-template-columns:170px minmax(0,1fr);gap:1.5rem;align-items:center;background:rgba(255,255,255,.72);border:1px solid rgba(153,0,0,.12);border-left:4px solid var(--terra);border-radius:10px;padding:1.55rem 1.75rem;box-shadow:0 12px 30px rgba(1,24,56,.05)}
+.practice-thumb{width:170px;height:120px;border-radius:8px;overflow:hidden;background:linear-gradient(135deg,var(--terra),var(--penn-red-dark));position:relative;flex-shrink:0}
+.practice-thumb img{width:100%;height:100%;object-fit:cover;display:block}
+.practice-kicker{font-size:.72rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--penn-red-dark);margin-bottom:.4rem}
+.practice-row h3{margin-bottom:.35rem;font-family:var(--font-sans)}
+.practice-row p{font-size:.97rem;line-height:1.65;margin:0}
+
+/* Fellows layout */
+.fellows-layout{display:grid;grid-template-columns:minmax(0,1fr) 360px;gap:4rem;align-items:start}
+.fellows-layout p{color:rgba(255,255,255,.86)}
+.fellows-details{border-left:1px solid rgba(255,255,255,.22);padding-left:1.6rem;display:grid;gap:1.8rem}
+.fellows-detail{position:relative}
+.fellows-detail::before{content:"";position:absolute;left:-1.93rem;top:.2rem;width:10px;height:10px;border-radius:50%;background:var(--accent-bright);box-shadow:0 0 0 6px var(--section-dark-red)}
+.fellows-label{font-size:.72rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--accent-bright);margin-bottom:.55rem}
+.fellows-detail h3{font-size:1.15rem;margin-bottom:.65rem;font-family:var(--font-sans)}
+.fellows-detail p{font-family:var(--font-sans);font-size:.9rem;line-height:1.65;color:rgba(255,255,255,.82);margin:0}
+.fellows-note{margin-top:2rem;max-width:700px;color:rgba(255,255,255,.82);font-size:.98rem}
+
+@media(max-width:950px){
+  .work-hero__copy h1{font-size:2.75rem}
+  .focus-layout,.fellows-layout{grid-template-columns:1fr;gap:2.5rem}
+  .section-head{display:block}
+  .section-head .lead{margin-top:.75rem}
+  .pipeline{grid-template-columns:1fr;gap:2.1rem;padding-top:.5rem;margin-left:1.2rem}
+  .pipeline::before{top:0;bottom:0;left:0;right:auto;width:2px;height:auto;background:linear-gradient(180deg,var(--terra),var(--accent-bright))}
+  .pipeline__step{padding-left:2.2rem;padding-right:0}
+  .pipeline__step::before{top:0;left:-1.2rem;box-shadow:0 0 0 7px var(--bg)}
+  .pipeline__step p{max-width:none}
+  .practice-row{grid-template-columns:1fr;gap:.75rem}
+}
+@media(max-width:768px){
+  .work-hero{padding:4.5rem 0;background-attachment:scroll}
+  .work-hero__copy h1{font-size:2.35rem}
+  .fellows-details{margin-top:.5rem}
+}
+</style>
+</head>
+<body>
+
+<!-- ═══ Nav ═══ -->
+<nav class="nav">
+  <a class="nav__brand" onclick="showPage('home')">
+    <img class="nav__logo" src="assets/SP2_stacked_simplified_RGB_reverse.png" alt="Penn SP2">
+    <span class="nav__name">Center for Climate Resilience</span>
+  </a>
+  <ul class="nav__links">
+    <li><a onclick="showPage('about')" data-page="about">About</a></li>
+    <li><a onclick="showPage('research')" data-page="research">Our Work</a></li>
+    <li><a onclick="showPage('team')" data-page="team">Team</a></li>
+    <li><a onclick="showPage('advisory')" data-page="advisory">Advisory Board</a></li>
+    <li><a onclick="showPage('engagement')" data-page="engagement">Engagement</a></li>
+    <li><a onclick="showPage('contact')" data-page="contact">Get Involved</a></li>
+  </ul>
+</nav>
+
+<!-- ═══ HOME ═══ -->
+<div class="page active" id="page-home" style="padding-top:0;">
+  <section class="hero">
+    <!--
+    <video class="hero__media" autoplay muted loop playsinline>
+      <source src="hero-video.mp4" type="video/mp4">
+    </video>
+    -->
+    <img class="hero__media" src="assets/cityscape.jpg" alt="">
+    <div class="hero__overlay"></div>
+    <div class="hero__content">
+      <div class="hero__eyebrow">University of Pennsylvania</div>
+      <h1>Center for Climate Resilience</h1>
+      <p>Building climate resilience through data-driven, evidence-based policy.</p>
+      <div class="hero__accent"></div>
+      <div class="hero__scroll" onclick="showPage('about')">
+        <span>Explore</span>
+        <svg viewBox="0 0 24 24"><path d="M12 5v14M5 12l7 7 7-7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- About (scroll-down on home) -->
+  <div class="ps" id="home-about">
+    <div class="container">
+      <div class="divider"></div>
+      <h2>About CCR</h2>
+      <p class="lead">The Center for Climate Resilience at the University of Pennsylvania advances the science and practice of climate adaptation and resilience. Our goal is simple: inform the development of scalable, evidence-based climate resilience solutions by catalyzing groundbreaking research and bringing together world-class researchers and policy, community, and industry partners.</p>
+    </div>
+  </div>
+
+</div>
+
+<!-- ═══ ABOUT ═══ -->
+<div class="page" id="page-about">
+  <div class="ps" style="background-image:linear-gradient(rgba(1,24,56,0.75), rgba(1,24,56,0.78)), url('assets/hurricane-florence.jpg');background-size:cover;background-position:center;background-attachment:fixed;">
+    <div class="container">
+      <div class="divider"></div>
+      <h2>A New Climate Reality</h2>
+      <p style="font-family:var(--font-serif);color:var(--text-secondary);font-size:1rem;line-height:1.75;margin-bottom:1.5rem;">The world is warming rapidly, and climate change exhibits enormous systemic inertia. Even if global emissions ceased immediately, significant warming would persist for decades. This warming is already causing significant impacts on human flourishing, whether through disrupted learning, deteriorating health outcomes, or reduced economic livelihoods.</p>
+      <p style="font-family:var(--font-serif);color:var(--text-secondary);font-size:1rem;line-height:1.75;margin-bottom:1.5rem;">The evidence suggests the need for a two-pronged strategy: aggressive emissions reduction to prevent catastrophic outcomes, alongside strategic investments in <em>climate resilience</em> and adaptation.</p>
+      <p style="font-family:var(--font-serif);color:var(--text-secondary);font-size:1rem;line-height:1.75;margin-bottom:4rem;">Beyond the political headlines around climate, there is an urgent and often overlooked need to develop climate resilience: the ability to prepare for, respond to, and recover from inevitable climate-related events like droughts and floods. Climate resilience is like a healthy immune system that can fend off disease. It takes global warming and its consequences in the near-term as a given and asks how we can prepare our homes, health, and livelihoods to minimize harm and maximize restoration of functioning.</p>
+      <div>
+        <div style="background:var(--bg-card);border:1px solid var(--border-light);border-radius:10px;padding:2.5rem;border-left:3px solid var(--terra);">
+          <div style="font-family:var(--font-sans);font-size:0.72rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--accent-bright);margin-bottom:1rem;">Our Approach</div>
+          <p style="color:var(--text-secondary);font-family:var(--font-serif);font-size:0.97rem;line-height:1.7;margin-bottom:1.5rem;">Social systems and public policies can either act as shock absorbers or shock amplifiers in a warming world. Strategic interventions such as early-warning systems, urban heat mitigation, and upgraded public infrastructure might reduce the health and productivity impacts of extreme heat, while inadequate power grids, misaligned incentives, and insufficient insurance coverage can transform manageable weather events into systemic failures with cascading economic losses.</p>
+          <p style="color:var(--text-primary);font-family:var(--font-serif);font-size:1.1rem;font-weight:600;line-height:1.6;margin:0;">Our approach centers on the often-overlooked social, economic, and psychological dimensions of climate adaptation and resilience, particularly those where, due to behavioral or market failures, private actors may not be expected to adapt fully on their own. Our work applies rigorous evidence-based methodologies to test, design, and scale interventions that address the human elements of climate preparedness.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="ps ps--light">
+    <div class="container">
+      <div class="divider"></div>
+      <h2>Policy impact</h2>
+      <p class="lead">We are currently working directly with these municipal governments to understand their climate adaptation needs so that we can produce targeted, evidence-based products they can use in decision-making.</p>
+
+      <div class="policy-map" aria-label="Global temperature anomaly map showing CCR partner cities NYC, London, Seoul, and Melbourne">
+        <img class="policy-map__img" src="assets/policy-map-crop.png" alt="Land-Ocean Temperature Index anomaly, January–March 2026, relative to 1951–1980 baseline">
+        <div class="city-pin"   style="left:31.7%;top:22.0%;"></div>
+        <div class="city-label" style="left:33.5%;top:17.6%;">New York City</div>
+
+        <div class="city-pin"   style="left:50.2%;top:16.3%;"></div>
+        <div class="city-label" style="left:52.0%;top:11.7%;">London</div>
+
+        <div class="city-pin"   style="left:82.5%;top:23.8%;"></div>
+        <div class="city-label" style="left:80.7%;top:19.3%;transform:translateX(-100%);">Seoul</div>
+
+        <div class="city-pin"   style="left:87.1%;top:64.8%;"></div>
+        <div class="city-label" style="left:85.3%;top:60.3%;transform:translateX(-100%);">Melbourne</div>
+      </div>
+      <p class="policy-map__caption">Land-Ocean Temperature Index anomaly, January–March 2026, relative to the 1951–1980 baseline. Source: NASA GISS.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ OUR WORK ═══ -->
+<div class="page" id="page-research">
+
+  <section class="work-hero">
+    <div class="container">
+      <div class="work-hero__copy">
+        <div class="eyebrow">Our Work</div>
+        <h1>Turning climate evidence into practical adaptation.</h1>
+        <p class="lead">CCR advances evidence-based climate adaptation by measuring climate risks, testing practical interventions, and helping institutions act on the best available research.</p>
+        <div class="hero__actions">
+          <a class="work-button work-button--solid" href="#human-capital">Current focus</a>
+          <a class="work-button" href="#practice">From research to practice</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="ps" id="what-we-do">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <div class="divider"></div>
+          <h2>A practical adaptation pipeline</h2>
+        </div>
+        <p class="lead">Our work moves from diagnosis to evaluation to implementation — connecting rigorous research with the decisions that shape climate resilience.</p>
+      </div>
+
+      <div class="pipeline" aria-label="CCR adaptation pipeline">
+        <article class="pipeline__step" data-step="01">
+          <div class="pipeline__tag">Measure</div>
+          <h3>Measure climate risk</h3>
+          <p>We quantify how climate hazards affect people, communities, infrastructure, and economic opportunity.</p>
+        </article>
+        <article class="pipeline__step" data-step="02">
+          <div class="pipeline__tag">Test</div>
+          <h3>Test adaptation solutions</h3>
+          <p>We study which policies, investments, and institutional responses reduce harm from climate shocks.</p>
+        </article>
+        <article class="pipeline__step" data-step="03">
+          <div class="pipeline__tag">Translate</div>
+          <h3>Translate evidence into action</h3>
+          <p>We partner with governments, nonprofits, businesses, and communities to support better resilience decisions.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="ps ps--light" id="human-capital">
+    <div class="container focus-layout">
+      <div>
+        <div class="eyebrow">Current focus</div>
+        <h2>Climate change and human capital</h2>
+        <p>Climate change is already shaping people&#8217;s ability to learn, work, stay healthy, and participate fully in economic life. CCR studies how climate shocks affect students, workers, families, and vulnerable communities — and which interventions can reduce those harms.</p>
+        <p>Our research spans the full range of climate hazards — heat, flooding, wildfire smoke, storms, and drought — but our current portfolio zeroes in on extreme heat as a high-impact, near-term threat to human capital.</p>
+      </div>
+      <div class="focus-list" aria-label="Heat-focused research projects">
+        <div class="focus-list__kicker">Spotlight: extreme heat</div>
+        <article class="focus-item">
+          <h3>Heat and learning</h3>
+          <p>How extreme heat affects student performance, school attendance, and long-term educational opportunity.</p>
+        </article>
+        <article class="focus-item">
+          <h3>Heat and work</h3>
+          <p>How rising temperatures affect worker safety, productivity, earnings, and labor market inequality.</p>
+        </article>
+        <article class="focus-item">
+          <h3>Heat and homelessness</h3>
+          <p>How extreme heat impacts unhoused populations, and which shelter, cooling, and outreach strategies meaningfully reduce harm.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="ps ps--practice" id="practice">
+    <div class="container">
+      <div class="practice-intro">
+        <div class="divider"></div>
+        <div class="eyebrow">From research to practice</div>
+        <h2>Turning evidence into decisions</h2>
+        <p class="lead">CCR works with partners to produce actionable evidence, decision tools, case studies, and training that help institutions prepare for climate impacts.</p>
+      </div>
+
+      <div class="practice-list">
+        <article class="practice-row">
+          <div class="practice-thumb">
+            <img src="assets/practice-partnerships.jpg" alt="" onerror="this.style.display='none'">
+          </div>
+          <div>
+            <div class="practice-kicker">Partnerships</div>
+            <h3>Applied research partnerships</h3>
+            <p>Collaborative projects with public agencies, nonprofits, community organizations, and private-sector partners.</p>
+          </div>
+        </article>
+        <article class="practice-row">
+          <div class="practice-thumb">
+            <img src="assets/practice-decision-support.jpg" alt="" onerror="this.style.display='none'">
+          </div>
+          <div>
+            <div class="practice-kicker">Decision support</div>
+            <h3>Risk analysis and tools</h3>
+            <p>Tailored evidence products that help institutions understand exposure, prioritize investments, and plan adaptation strategies.</p>
+          </div>
+        </article>
+        <article class="practice-row">
+          <div class="practice-thumb">
+            <img src="assets/practice-capacity-building.jpg" alt="" onerror="this.style.display='none'">
+          </div>
+          <div>
+            <div class="practice-kicker">Capacity building</div>
+            <h3>Education and training</h3>
+            <p>Programs that help leaders understand physical climate risk and translate research into concrete decisions.</p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<!-- ═══ TEAM ═══ -->
+<div class="page" id="page-team">
+  <div class="ps" style="background-image:linear-gradient(rgba(1,24,56,0.75), rgba(1,24,56,0.78)), url('assets/team.jpg');background-size:cover;background-position:center;background-attachment:fixed;">
+    <div class="container">
+      <div class="divider"></div>
+      <h2>Team</h2>
+      <p class="lead" style="margin-bottom:3rem;">A multidisciplinary team bridging climate science, economics, public health, and urban policy.</p>
+      <h3 style="font-size:1.05rem;margin-bottom:1.5rem;color:var(--accent-bright);font-family:var(--font-sans);text-transform:uppercase;letter-spacing:0.06em;font-weight:600;">Core team</h3>
+      <div class="team-grid" style="margin-bottom:5rem;" id="core-team">
+        <div class="team-member" onclick="toggleBio('bio-jisung')"><div class="team-member__photo" style="background:url('assets/JisungParkHeadshot-02.jpg') center/cover;color:transparent;">JP</div><h3>Jisung Park</h3><div class="team-member__role">Director</div></div>
+        <div class="team-member" onclick="toggleBio('bio-caro')"><div class="team-member__photo" style="background:url('assets/Caro%20Park.jpeg') center/cover;color:transparent;">CP</div><h3>Caro Park</h3><div class="team-member__role">Deputy Director</div></div>
+        <div class="team-member" onclick="toggleBio('bio-paul')"><div class="team-member__photo" style="background:url('assets/Paul%20Stainier.jpg') center/cover;color:transparent;">PS</div><h3>Paul Stainier</h3><div class="team-member__role">Postdoctoral Fellow</div></div>
+        <div class="team-member" onclick="toggleBio('bio-hwiyoung')"><div class="team-member__photo" style="background:url('assets/Hwiyoung.jpg') center/cover;color:transparent;">HL</div><h3>Hwiyoung Lee</h3><div class="team-member__role">PhD Candidate</div></div>
+        <div class="team-member" onclick="toggleBio('bio-husel')"><div class="team-member__photo" style="background:url('assets/Husel%20Husile.jpg') center/cover;color:transparent;">HH</div><h3>Husel Husile</h3><div class="team-member__role">PhD Candidate</div></div>
+
+        <div class="team-bio" id="bio-jisung" style="position:relative;">
+          <img class="team-bio__img" src="assets/JisungParkHeadshot-02.jpg" alt="Jisung Park">
+          <div class="team-bio__text">
+            <h3>R. Jisung Park, PhD</h3>
+            <div class="team-member__role">Director · SP2 · Wharton</div>
+            <p>R. Jisung Park is an environmental and labor economist at Penn SP2 and Wharton studying how environmental factors shape economic opportunity. His research combines large-scale data and quasi-experimental methods to understand the implications of environmental change for human flourishing, and how effective policy responses may be designed.</p>
+            <p>His work spans heat and learning, extreme heat and labor market inequality, natural disasters and human capital, and worker and firm adaptation to climate change. His research has been published in leading journals including the American Economic Journal: Economic Policy, Journal of Human Resources, and Nature Human Behavior, and has been widely covered in the New York Times, Wall Street Journal, and the BBC.</p>
+            <p>He has advised policymakers through Congressional testimony and briefings for the UN, World Bank, and multiple U.S. federal agencies. He holds a PhD in Economics from Harvard, where he was an NSF Fellow, and master's degrees from Oxford, where he was a Rhodes Scholar.</p>
+          </div>
+          <button class="team-bio__close" onclick="event.stopPropagation();toggleBio('bio-jisung')">&times;</button>
+        </div>
+
+        <div class="team-bio" id="bio-caro" style="position:relative;">
+          <img class="team-bio__img" src="assets/Caro%20Park.jpeg" alt="Caro Park">
+          <div class="team-bio__text">
+            <h3>Caro Park, PhD</h3>
+            <div class="team-member__role">Deputy Director</div>
+            <p>Caro is the Deputy Director of the Center for Climate Resilience. She is an applied climate scientist whose research spans climate variability, agricultural systems, and population health outcomes. She has experience working with climate-exposed and resource-constrained communities across Sub-Saharan Africa, Southeast Asia, and Australia.</p>
+            <p>She holds a PhD in Population Health Sciences from Harvard University, where she went on to conduct postdoctoral research in the Department of Earth and Planetary Sciences. She was previously a Fulbright Public Policy Fellow at the University of Melbourne.</p>
+          </div>
+          <button class="team-bio__close" onclick="event.stopPropagation();toggleBio('bio-caro')">&times;</button>
+        </div>
+
+        <div class="team-bio" id="bio-paul" style="position:relative;">
+          <img class="team-bio__img" src="assets/Paul%20Stainier.jpg" alt="Paul Stainier">
+          <div class="team-bio__text">
+            <h3>Paul Stainier, PhD</h3>
+            <div class="team-member__role">Postdoctoral Fellow · SP2</div>
+            <p>Paul Stainier is an applied microeconomist and Postdoctoral Fellow in the School of Social Policy and Practice at the University of Pennsylvania. His research covers topics in environmental and labor economics, including the welfare costs of extreme weather events, the barriers to climate adaptation, and the determinants of worker compensation.</p>
+            <p>He holds a PhD in Environment and Sustainability from the University of California, Los Angeles.</p>
+          </div>
+          <button class="team-bio__close" onclick="event.stopPropagation();toggleBio('bio-paul')">&times;</button>
+        </div>
+
+        <div class="team-bio" id="bio-hwiyoung" style="position:relative;">
+          <img class="team-bio__img" src="assets/Hwiyoung.jpg" alt="Hwiyoung Lee">
+          <div class="team-bio__text">
+            <h3>Hwiyoung Lee</h3>
+            <div class="team-member__role">PhD Candidate · SP2</div>
+            <p>Hwiyoung Lee is a PhD candidate at the University of Pennsylvania School of Social Policy &amp; Practice. His research focuses on the impact of temperature on labor markets in South Korea.</p>
+          </div>
+          <button class="team-bio__close" onclick="event.stopPropagation();toggleBio('bio-hwiyoung')">&times;</button>
+        </div>
+
+        <div class="team-bio" id="bio-husel" style="position:relative;">
+          <img class="team-bio__img" src="assets/Husel%20Husile.jpg" alt="Husel Husile">
+          <div class="team-bio__text">
+            <h3>Husel Husile</h3>
+            <div class="team-member__role">PhD Candidate · SP2</div>
+            <p>Husel is a PhD candidate at the University of Pennsylvania School of Social Policy &amp; Practice. His research focuses on climate adaptation and social resilience in the Global South. He studies how environmental shocks influence social cohesion and social welfare by using large-scale panel data, demographic surveys, and satellite-based climate indicators.</p>
+          </div>
+          <button class="team-bio__close" onclick="event.stopPropagation();toggleBio('bio-husel')">&times;</button>
+        </div>
+      </div>
+      <h3 style="font-size:1.05rem;margin-bottom:1.5rem;color:var(--accent-bright);font-family:var(--font-sans);text-transform:uppercase;letter-spacing:0.06em;font-weight:600;">Climate Adaptation Fellows</h3>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem;">
+        <div class="fellow"><div class="fellow__name">Angelo dos Santos, PhD</div><div class="fellow__role">Postdoctoral Fellow</div></div>
+        <div class="fellow"><div class="fellow__name">Yabo Vidogbena, PhD</div><div class="fellow__role">Postdoctoral Fellow</div></div>
+        <div class="fellow"><div class="fellow__name">Yujie Zhang, PhD</div><div class="fellow__role">Postdoctoral Fellow</div></div>
+        <div class="fellow"><div class="fellow__name">Chris Wodicka</div><div class="fellow__role">PhD Candidate</div></div>
+        <div class="fellow"><div class="fellow__name">Abishek Nippani</div><div class="fellow__role">Doctoral Student</div></div>
+        <div class="fellow"><div class="fellow__name">Rebecca Pepe</div><div class="fellow__role">PhD Candidate</div></div>
+        <div class="fellow"><div class="fellow__name">Sebastian Prandoni</div><div class="fellow__role">PhD Student</div></div>
+        <div class="fellow"><div class="fellow__name">Heather Do</div><div class="fellow__role">PhD Student</div></div>
+        <div class="fellow"><div class="fellow__name">Mohamad Al-Abbas</div><div class="fellow__role">PhD Candidate</div></div>
+        <div class="fellow"><div class="fellow__name">Nazar Khalid</div><div class="fellow__role">PhD Candidate</div></div>
+        <div class="fellow"><div class="fellow__name">Tingting Rui</div><div class="fellow__role">PhD Candidate</div></div>
+        <div class="fellow"><div class="fellow__name">Angel Bao</div><div class="fellow__role">Graduate Student</div></div>
+        <div class="fellow"><div class="fellow__name">Anicca Liu</div><div class="fellow__role">Fellow</div></div>
+        <div class="fellow"><div class="fellow__name">Lindsay Park</div><div class="fellow__role">Fellow</div></div>
+        <div class="fellow"><div class="fellow__name">Ellery Spikes</div><div class="fellow__role">Undergraduate Fellow</div></div>
+        <div class="fellow"><div class="fellow__name">Ljuben Atov</div><div class="fellow__role">Undergraduate Fellow</div></div>
+      </div>
+    </div>
+  </div>
+
+  <section class="ps ps--red" id="fellows">
+    <div class="container fellows-layout">
+      <div>
+        <div class="divider"></div>
+        <div class="eyebrow">Research community</div>
+        <h2>Climate Adaptation Fellows</h2>
+        <p class="lead">A research community at CCR advancing evidence and ideas for a more resilient world. CAF focuses on building evidence for how communities, institutions, and economies adapt to the climate shocks already underway.</p>
+        <p class="fellows-note">CAF brings together researchers from economics, sociology, demography, public policy, and other fields for weekly seminars, project presentations, and collaborative research. Fellows are paired with mentors and supported to carry out applied empirical research projects during their time at Penn.</p>
+      </div>
+      <div class="fellows-details" aria-label="Climate Adaptation Fellows schedule">
+        <article class="fellows-detail">
+          <div class="fellows-label">Academic year</div>
+          <h3>Weekly seminar</h3>
+          <p><strong>Mondays 1:00–2:00 pm</strong><br>GSE 427, University of Pennsylvania</p>
+        </article>
+        <article class="fellows-detail">
+          <div class="fellows-label">Summer</div>
+          <h3>Summer seminar series</h3>
+          <p><strong>Schedule TBA</strong><br>Open to Penn affiliates and collaborators</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<!-- ═══ ADVISORY BOARD ═══ -->
+<div class="page" id="page-advisory">
+  <div class="ps" style="background-image:linear-gradient(rgba(1,24,56,0.75), rgba(1,24,56,0.78)), url('assets/advisory-board.jpg');background-size:cover;background-position:center;background-attachment:fixed;">
+    <div class="container">
+      <div class="divider"></div>
+      <h2>Advisory Board</h2>
+      <p class="lead" style="margin-bottom:2.5rem;">We're building an advisory board to help guide CCR's research agenda, strengthen our partnerships, and expand the center's impact.</p>
+      <div style="background:var(--bg-card);border:1px solid var(--border-light);border-radius:10px;padding:2.5rem;max-width:680px;">
+        <h3 style="font-size:1.1rem;margin-bottom:1rem;color:var(--accent-bright);font-family:var(--font-sans);text-transform:uppercase;letter-spacing:0.06em;font-weight:600;">Coming soon</h3>
+        <p style="color:var(--text-secondary);font-family:var(--font-serif);font-size:0.97rem;line-height:1.7;">We're in the process of finalizing board member decisions over the coming months. The advisory board will bring together leaders from urban policy and corporate governance to support CCR's mission of translating research into real-world resilience.</p>
+        <p style="color:var(--text-secondary);font-family:var(--font-serif);font-size:0.97rem;line-height:1.7;">If you're interested in being part of this effort as we build the center, we'd love to hear from you.</p>
+        <p style="margin-top:1.5rem;margin-bottom:0;"><a href="mailto:parkcaro@upenn.edu" style="display:inline-block;padding:0.65rem 1.5rem;border:1px solid var(--accent);border-radius:6px;color:var(--accent-bright);font-family:var(--font-sans);font-size:0.85rem;font-weight:600;letter-spacing:0.02em;transition:background .2s,color .2s;"
+          onmouseover="this.style.background='var(--accent)';this.style.color='var(--bg)'"
+          onmouseout="this.style.background='transparent';this.style.color='var(--accent-bright)'">Get in touch</a></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ ENGAGEMENT ═══ -->
+<div class="page" id="page-engagement">
+
+  <section class="work-hero" style="background-image:linear-gradient(135deg,rgba(1,31,91,.75),rgba(1,24,56,.75) 55%,rgba(110,23,23,.75)),url('assets/engagement.png');background-position:center 12%;">
+    <div class="container">
+      <div class="work-hero__copy">
+        <div class="eyebrow">Press &amp; engagement</div>
+        <h1>Engagement</h1>
+        <p class="lead">Keep up to date on all the activities happening at CCR. From public talks and policy briefings to media coverage and our weekly seminar series, this is where we share what we&#8217;ve been working on.</p>
+        <div class="hero__actions">
+          <a class="work-button work-button--solid" href="#events">Events</a>
+          <a class="work-button" href="#blog">Blog</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="ps" id="events">
+    <div class="container">
+      <div class="divider"></div>
+      <h2>Events &amp; talks</h2>
+      <p class="lead" style="margin-bottom:3rem;">Recent appearances, panels, and media.</p>
+      <div class="eng-grid" style="margin-bottom:5rem;">
+        <a class="eng-card" href="https://kleinmanenergy.upenn.edu/events/its-getting-hot-out-here-protecting-workers-productivity/" target="_blank">
+          <img class="eng-card__img" src="assets/eng-card-kleinman-webinar.jpg" alt="Construction workers at sunset — extreme heat and worker safety">
+          <div class="eng-card__body">
+            <div class="eng-card__tag">Event</div>
+            <h3>It's Getting Hot Out Here: Protecting Workers &amp; Productivity</h3>
+            <div class="eng-card__date">April 14, 2026 · Kleinman Center for Energy Policy</div>
+            <p>A panel on extreme heat, worker safety, and productivity featuring Jisung Park and former OSHA administrator David Michaels, moderated by former Biden Council of Economic Advisers member Heather Boushey. The conversation covered econometric estimates of productivity losses, evolving OSHA standards, and what a climate-aware worker protection agenda should look like.</p>
+          </div>
+        </a>
+        <a class="eng-card" href="https://upenn.imodules.com/s/1587/gid2/index.aspx?sid=1587&gid=7&pgid=252&cid=102026&ecid=102026&crid=0&calpgid=61&calcid=10285" target="_blank">
+          <img class="eng-card__img" src="assets/eng-card-penn-alumni-event.jpg" alt="Penn Alumni Climate Resilience event with President Jameson, Professor Dorit Aviv, and Jisung Park">
+          <div class="eng-card__body">
+            <div class="eng-card__tag">Event</div>
+            <h3>Penn Alumni Climate Resilience Event</h3>
+            <div class="eng-card__date">2026 · University of Pennsylvania Alumni</div>
+            <p>A conversation with Penn President J. Larry Jameson and Professor Dorit Aviv (Weitzman School of Design) on extreme heat: what it's already doing to cities and workers, and what we can do about it. Hosted for the Penn alumni community to connect CCR's research to real-world adaptation.</p>
+          </div>
+        </a>
+        <a class="eng-card" href="#">
+          <img class="eng-card__img" src="assets/seoul.jpg" alt="Seoul Asian Leadership Conference" onerror="this.style.display='none'">
+          <div class="eng-card__body">
+            <div class="eng-card__tag">Talk</div>
+            <h3>Seoul Asian Leadership Conference (ALC)</h3>
+            <div class="eng-card__date">May 2026 · Seoul, South Korea</div>
+            <p>"The Future of Energy Transition and Climate Regime Reshaped by Geopolitical Crises." A talk at the Asian Leadership Conference connecting CCR's research on cooling access, labor market exposure, and adaptation to the shifting geopolitics of the energy transition across the Asia-Pacific.</p>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="ps ps--practice" id="blog">
+    <div class="container">
+      <div class="divider"></div>
+      <h2>Blog</h2>
+      <p class="lead" style="margin-bottom:3rem;">Updates from the Center for Climate Resilience.</p>
+
+      <div class="blog-post">
+        <div class="blog-post__date">April 22, 2026</div>
+        <h3>Wrapping up CAF for Spring 2026</h3>
+        <p>As we close out the spring semester, we're reflecting on a productive season for the Climate Adaptation Fellows. Our weekly Monday seminars brought together fellows for project presentations, paper reviews, and thematic discussions spanning the breadth of climate adaptation research.</p>
+        <p>This semester's lineup:</p>
+        <p style="font-family:var(--font-sans);font-size:0.92rem;line-height:2.2;color:var(--text-on-light);">
+          <span style="color:var(--terra);font-weight:600;">Jan 26 (Wk 3)</span>: Angelo dos Santos · "Deforestation policies in Zambia"<br>
+          <span style="color:var(--terra);font-weight:600;">Feb 2 (Wk 4)</span>: Yujie Zhang · "The effects of environmental factors on respiratory health among young children in Bangladesh"<br>
+          <span style="color:var(--terra);font-weight:600;">Feb 9 (Wk 5)</span>: Discussion: Human Capital &amp; Labor, the micro-foundations of adaptation<br>
+          <span style="color:var(--terra);font-weight:600;">Feb 16 (Wk 6)</span>: Chris Wodicka · "The impact of natural disasters on school district finances in Virginia"<br>
+          <span style="color:var(--terra);font-weight:600;">Feb 23 (Wk 7)</span>: Hwiyoung Lee · "The impact of temperature on labor markets in South Korea"<br>
+          <span style="color:var(--terra);font-weight:600;">Mar 2 (Wk 8)</span>: Oindriza Nodi · "Predicting zip code-level utility disconnection rates in Oregon and Washington states"<br>
+          <span style="color:var(--terra);font-weight:600;">Mar 16 (Wk 10)</span>: Angel Bao · project presentation<br>
+          <span style="color:var(--terra);font-weight:600;">Mar 30 (Wk 12)</span>: Paul Stainier &amp; Sika Gadzanku · "The impact of extreme weather on truck accidents in the United States"<br>
+          <span style="color:var(--terra);font-weight:600;">Apr 6 (Wk 13)</span>: Yabo Vidogbena · "Temperature and learning outcomes in Western and Southern African countries"<br>
+          <span style="color:var(--terra);font-weight:600;">Apr 13 (Wk 14)</span>: B. Jones et al. (2026): "With or Without U? Binning Bias and the Causal Effects of Temperature Extremes"<br>
+          <span style="color:var(--terra);font-weight:600;">Apr 20 (Wk 15)</span>: Tingting Rui · "Climate hazards and adolescent mental health in Malawi"
+        </p>
+        <p>We're grateful to every fellow who presented work and contributed to discussions this semester. Stay tuned for announcements about the summer seminar series, with details coming soon.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ GET INVOLVED ═══ -->
+<div class="page" id="page-contact">
+  <div class="ps" style="background-image:linear-gradient(rgba(1,24,56,0.75), rgba(1,24,56,0.78)), url('assets/get-involved.jpg');background-size:cover;background-position:center;background-attachment:fixed;min-height:calc(100vh - 70px);">
+    <div class="container">
+      <div class="divider"></div>
+      <h2>Get involved</h2>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:3rem;margin-top:1rem;">
+        <div>
+          <h3 style="font-size:1.15rem;margin-bottom:0.75rem;font-family:var(--font-sans);">Get in touch</h3>
+          <p style="color:var(--text-secondary);font-family:var(--font-serif);font-size:0.97rem;line-height:1.7;">For inquiries about research collaboration, policy partnerships, or joining the team.</p>
+          <p style="margin-top:1rem;font-family:var(--font-sans);"><a href="mailto:parkcaro@upenn.edu" style="font-weight:600;">parkcaro@upenn.edu</a></p>
+        </div>
+        <div>
+          <h3 style="font-size:1.15rem;margin-bottom:0.75rem;font-family:var(--font-sans);">Support our work</h3>
+          <p style="color:var(--text-secondary);font-family:var(--font-serif);font-size:0.97rem;line-height:1.7;">Gifts to the Center for Climate Resilience support research that directly shapes policy for the communities most exposed to climate risk.</p>
+          <p style="margin-top:1rem;"><a href="#" style="display:inline-block;padding:0.65rem 1.5rem;border:1px solid var(--accent);border-radius:6px;color:var(--accent-bright);font-family:var(--font-sans);font-size:0.85rem;font-weight:600;letter-spacing:0.02em;transition:background .2s,color .2s;"
+            onmouseover="this.style.background='var(--accent)';this.style.color='var(--bg)'"
+            onmouseout="this.style.background='transparent';this.style.color='var(--accent-bright)'">Make a gift</a></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ Footer ═══ -->
+<footer class="footer">
+  <div class="container">
+    <div>&copy; 2026 Center for Climate Resilience &middot; University of Pennsylvania</div>
+    <div><a href="mailto:parkcaro@upenn.edu">parkcaro@upenn.edu</a></div>
+  </div>
+</footer>
+
+<script>
+function showPage(page) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  const t = document.getElementById('page-' + page);
+  if (t) t.classList.add('active');
+  document.querySelectorAll('.nav__links a').forEach(a => {
+    a.classList.toggle('active', a.dataset.page === page);
+  });
+  window.scrollTo(0, 0);
+}
+function toggleBio(id) {
+  const bio = document.getElementById(id);
+  const wasActive = bio.classList.contains('active');
+  document.querySelectorAll('.team-bio').forEach(b => b.classList.remove('active'));
+  if (!wasActive) {
+    bio.classList.add('active');
+    bio.scrollIntoView({behavior:'smooth',block:'nearest'});
+  }
+}
+</script>
+</body>
+</html>
