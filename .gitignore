@@ -3,3 +3,9 @@
 *.log
 .idea/
 .vscode/
+
+# Local working / source files — not part of the deployed site
+ccr_website.html
+ccr_website_slim_preview.html
+ccr_logo_menu.html
+*.bak
