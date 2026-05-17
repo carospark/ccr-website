@@ -315,64 +315,27 @@ p{margin-bottom:1rem;font-family:var(--font-serif)}
   .fellows-details{margin-top:.5rem}
 }
 
-/* ── HIDE-FOR-LAUNCH OVERLAY ── */
-.hide-for-launch{position:relative}
-.hide-for-launch::before{
-  content:"";
-  position:absolute;
-  inset:0;
-  background:rgba(255,255,255,0.55);
-  z-index:50;
-  pointer-events:none;
-}
-.hide-for-launch::after{
-  content:"";
-  position:absolute;
-  inset:0;
-  background:
-    linear-gradient(to top right, transparent calc(50% - 6px), #CC0000 calc(50% - 6px), #CC0000 calc(50% + 6px), transparent calc(50% + 6px)),
-    linear-gradient(to top left,  transparent calc(50% - 6px), #CC0000 calc(50% - 6px), #CC0000 calc(50% + 6px), transparent calc(50% + 6px));
-  z-index:51;
-  pointer-events:none;
-}
-.hide-for-launch__label{
-  position:absolute;
-  top:1rem;
-  left:50%;
-  transform:translateX(-50%);
-  z-index:52;
-  background:#CC0000;
-  color:#fff;
-  font-family:var(--font-sans);
-  font-size:0.72rem;
-  font-weight:700;
-  letter-spacing:0.12em;
-  text-transform:uppercase;
-  padding:0.45rem 0.9rem;
-  border-radius:3px;
-  box-shadow:0 2px 8px rgba(0,0,0,0.3);
-}
 </style>
 </head>
 <body>
 
 <!-- ═══ Nav ═══ -->
 <nav class="nav">
-  <a class="nav__brand">
+  <a class="nav__brand" onclick="showPage('home')">
     <img class="nav__logo" src="assets/SP2_stacked_simplified_RGB_reverse.png" alt="Penn SP2">
     <span class="nav__name">Center for Climate Resilience</span>
   </a>
   <ul class="nav__links">
-    <li><a data-page="about">About</a></li>
-    <li><a data-page="research">Our Work</a></li>
-    <li><a data-page="team">Team</a></li>
-    <li><a data-page="advisory">Advisory Board</a></li>
-    <li><a data-page="engagement">Engagement</a></li>
-    <li><a data-page="contact">Get Involved</a></li>
+    <li><a onclick="showPage('about')" data-page="about">About</a></li>
+    <li><a onclick="showPage('research')" data-page="research">Our Work</a></li>
+    <li><a onclick="showPage('team')" data-page="team">Team</a></li>
+    <li><a onclick="showPage('engagement')" data-page="engagement">Engagement</a></li>
+    <li><a onclick="showPage('contact')" data-page="contact">Get Involved</a></li>
   </ul>
 </nav>
 
 <!-- ═══ HOME ═══ -->
+<div class="page active" id="page-home" style="padding-top:0;">
   <section class="hero">
     <!--
     <video class="hero__media" autoplay muted loop playsinline>
@@ -384,9 +347,9 @@ p{margin-bottom:1rem;font-family:var(--font-serif)}
     <div class="hero__content">
       <div class="hero__eyebrow">University of Pennsylvania</div>
       <h1>Center for Climate Resilience</h1>
-      <p>Building climate resilience through data-driven, evidence-based policy.</p>
+      <p>Building climate resilience through <strong>dispassionate, data-driven, decision-relevant</strong> analysis</p>
       <div class="hero__accent"></div>
-      <div class="hero__scroll" onclick="document.getElementById('home-about').scrollIntoView({behavior:'smooth'})">
+      <div class="hero__scroll" onclick="showPage('about')">
         <span>Explore</span>
         <svg viewBox="0 0 24 24"><path d="M12 5v14M5 12l7 7 7-7" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </div>
@@ -402,14 +365,231 @@ p{margin-bottom:1rem;font-family:var(--font-serif)}
     </div>
   </div>
 
+</div>
+
+<!-- ═══ ABOUT ═══ -->
+<div class="page" id="page-about">
+  <div class="ps" style="background-image:linear-gradient(rgba(1,24,56,0.75), rgba(1,24,56,0.78)), url('assets/hurricane-florence.jpg');background-size:cover;background-position:center;background-attachment:fixed;">
+    <div class="container">
+      <div class="divider"></div>
+      <h2>A New Climate Reality</h2>
+      <p style="font-family:var(--font-serif);color:var(--text-secondary);font-size:1rem;line-height:1.75;margin-bottom:1.5rem;">The world is warming rapidly, and climate change exhibits enormous systemic inertia. Even if global emissions ceased immediately, significant warming would persist for decades. This warming is already causing significant impacts on human flourishing, whether through disrupted learning, deteriorating health outcomes, or reduced economic livelihoods.</p>
+      <p style="font-family:var(--font-serif);color:var(--text-secondary);font-size:1rem;line-height:1.75;margin-bottom:1.5rem;">The evidence suggests the need for a two-pronged strategy: aggressive emissions reduction to prevent catastrophic outcomes, alongside strategic investments in <em>climate resilience</em> and adaptation.</p>
+      <p style="font-family:var(--font-serif);color:var(--text-secondary);font-size:1rem;line-height:1.75;margin-bottom:4rem;">Beyond the political headlines around climate, there is an urgent and often overlooked need to develop climate resilience: the ability to prepare for, respond to, and recover from inevitable climate-related events like droughts and floods. Climate resilience is like a healthy immune system that can fend off disease. It takes global warming and its consequences in the near-term as a given and asks how we can prepare our homes, health, and livelihoods to minimize harm and maximize restoration of functioning.</p>
+      <div>
+        <div style="background:var(--bg-card);border:1px solid var(--border-light);border-radius:10px;padding:2.5rem;border-left:3px solid var(--terra);">
+          <div style="font-family:var(--font-sans);font-size:0.72rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--accent-bright);margin-bottom:1rem;">Our Approach</div>
+          <p style="color:var(--text-secondary);font-family:var(--font-serif);font-size:0.97rem;line-height:1.7;margin-bottom:1.5rem;">Social systems and public policies can either act as shock absorbers or shock amplifiers in a warming world. Strategic interventions such as early-warning systems, urban heat mitigation, and upgraded public infrastructure might reduce the health and productivity impacts of extreme heat, while inadequate power grids, misaligned incentives, and insufficient insurance coverage can transform manageable weather events into systemic failures with cascading economic losses.</p>
+          <p style="color:var(--text-primary);font-family:var(--font-serif);font-size:1.1rem;font-weight:600;line-height:1.6;margin:0;">Our approach centers on the often-overlooked social, economic, and psychological dimensions of climate adaptation and resilience, particularly those where, due to behavioral or market failures, private actors may not be expected to adapt fully on their own. Our work applies rigorous evidence-based methodologies to test, design, and scale interventions that address the human elements of climate preparedness.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ OUR WORK ═══ -->
+<div class="page" id="page-research">
+
+  <section class="work-hero">
+    <div class="container">
+      <div class="work-hero__copy">
+        <div class="eyebrow">Our Work</div>
+        <h1>Turning climate evidence into practical adaptation.</h1>
+        <p class="lead">CCR advances evidence-based climate adaptation by measuring climate risks, testing practical interventions, and helping institutions act on the best available research.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="ps" id="what-we-do">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <div class="divider"></div>
+          <h2>A practical adaptation pipeline</h2>
+        </div>
+        <p class="lead">Our work moves from diagnosis to evaluation to implementation — connecting rigorous research with the decisions that shape climate resilience.</p>
+      </div>
+
+      <div class="pipeline" aria-label="CCR adaptation pipeline">
+        <article class="pipeline__step" data-step="01">
+          <div class="pipeline__tag">Measure</div>
+          <h3>Measure climate risk</h3>
+          <p>We quantify how climate hazards affect people, communities, infrastructure, and economic opportunity.</p>
+        </article>
+        <article class="pipeline__step" data-step="02">
+          <div class="pipeline__tag">Test</div>
+          <h3>Test adaptation solutions</h3>
+          <p>We study which policies, investments, and institutional responses reduce harm from climate shocks.</p>
+        </article>
+        <article class="pipeline__step" data-step="03">
+          <div class="pipeline__tag">Translate</div>
+          <h3>Translate evidence into action</h3>
+          <p>We partner with governments, nonprofits, businesses, and communities to support better resilience decisions.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<!-- ═══ TEAM ═══ -->
+<div class="page" id="page-team">
+  <div class="ps" style="background-image:linear-gradient(rgba(1,24,56,0.75), rgba(1,24,56,0.78)), url('assets/team.jpg');background-size:cover;background-position:center;background-attachment:fixed;">
+    <div class="container">
+      <div class="divider"></div>
+      <h2>Team</h2>
+      <p class="lead" style="margin-bottom:3rem;">A multidisciplinary team bridging climate science, economics, public health, and urban policy.</p>
+      <h3 style="font-size:1.05rem;margin-bottom:1.5rem;color:var(--accent-bright);font-family:var(--font-sans);text-transform:uppercase;letter-spacing:0.06em;font-weight:600;">Core team</h3>
+      <div class="team-grid" style="margin-bottom:5rem;" id="core-team">
+        <div class="team-member" onclick="toggleBio('bio-jisung')"><div class="team-member__photo" style="background:url('assets/JisungParkHeadshot-02.jpg') center/cover;color:transparent;">JP</div><h3>Jisung Park</h3><div class="team-member__role">Director</div></div>
+        <div class="team-member" onclick="toggleBio('bio-caro')"><div class="team-member__photo" style="background:url('assets/Caro%20Park.jpeg') center/cover;color:transparent;">CP</div><h3>Caro Park</h3><div class="team-member__role">Deputy Director</div></div>
+        <div class="team-member" onclick="toggleBio('bio-paul')"><div class="team-member__photo" style="background:url('assets/Paul%20Stainier.jpg') center/cover;color:transparent;">PS</div><h3>Paul Stainier</h3><div class="team-member__role">Postdoctoral Fellow</div></div>
+        <div class="team-member" onclick="toggleBio('bio-hwiyoung')"><div class="team-member__photo" style="background:url('assets/Hwiyoung.jpg') center/cover;color:transparent;">HL</div><h3>Hwiyoung Lee</h3><div class="team-member__role">PhD Candidate</div></div>
+        <div class="team-member" onclick="toggleBio('bio-husel')"><div class="team-member__photo" style="background:url('assets/Husel%20Husile.jpg') center/cover;color:transparent;">HH</div><h3>Husel Husile</h3><div class="team-member__role">PhD Candidate</div></div>
+
+        <div class="team-bio" id="bio-jisung" style="position:relative;">
+          <img class="team-bio__img" src="assets/JisungParkHeadshot-02.jpg" alt="Jisung Park">
+          <div class="team-bio__text">
+            <h3>R. Jisung Park, PhD</h3>
+            <div class="team-member__role">Director · SP2 · Wharton</div>
+            <p>R. Jisung Park is an environmental and labor economist at Penn SP2 and Wharton studying how environmental factors shape economic opportunity. His research combines large-scale data and quasi-experimental methods to understand the implications of environmental change for human flourishing, and how effective policy responses may be designed.</p>
+            <p>His work spans heat and learning, extreme heat and labor market inequality, natural disasters and human capital, and worker and firm adaptation to climate change. His research has been published in leading journals including the American Economic Journal: Economic Policy, Journal of Human Resources, and Nature Human Behavior, and has been widely covered in the New York Times, Wall Street Journal, and the BBC.</p>
+            <p>He has advised policymakers through Congressional testimony and briefings for the UN, World Bank, and multiple U.S. federal agencies. He holds a PhD in Economics from Harvard, where he was an NSF Fellow, and master's degrees from Oxford, where he was a Rhodes Scholar.</p>
+          </div>
+          <button class="team-bio__close" onclick="event.stopPropagation();toggleBio('bio-jisung')">&times;</button>
+        </div>
+
+        <div class="team-bio" id="bio-caro" style="position:relative;">
+          <img class="team-bio__img" src="assets/Caro%20Park.jpeg" alt="Caro Park">
+          <div class="team-bio__text">
+            <h3>Caro Park, PhD</h3>
+            <div class="team-member__role">Deputy Director</div>
+            <p>Caro is the Deputy Director of the Center for Climate Resilience. She is an applied climate scientist whose research spans climate variability, agricultural systems, and population health outcomes. She has experience working with climate-exposed and resource-constrained communities across Sub-Saharan Africa, Southeast Asia, and Australia.</p>
+            <p>She holds a PhD in Population Health Sciences from Harvard University, where she went on to conduct postdoctoral research in the Department of Earth and Planetary Sciences. She was previously a Fulbright Public Policy Fellow at the University of Melbourne.</p>
+          </div>
+          <button class="team-bio__close" onclick="event.stopPropagation();toggleBio('bio-caro')">&times;</button>
+        </div>
+
+        <div class="team-bio" id="bio-paul" style="position:relative;">
+          <img class="team-bio__img" src="assets/Paul%20Stainier.jpg" alt="Paul Stainier">
+          <div class="team-bio__text">
+            <h3>Paul Stainier, PhD</h3>
+            <div class="team-member__role">Postdoctoral Fellow · SP2</div>
+            <p>Paul Stainier is an applied microeconomist and Postdoctoral Fellow in the School of Social Policy and Practice at the University of Pennsylvania. His research covers topics in environmental and labor economics, including the welfare costs of extreme weather events, the barriers to climate adaptation, and the determinants of worker compensation.</p>
+            <p>He holds a PhD in Environment and Sustainability from the University of California, Los Angeles.</p>
+          </div>
+          <button class="team-bio__close" onclick="event.stopPropagation();toggleBio('bio-paul')">&times;</button>
+        </div>
+
+        <div class="team-bio" id="bio-hwiyoung" style="position:relative;">
+          <img class="team-bio__img" src="assets/Hwiyoung.jpg" alt="Hwiyoung Lee">
+          <div class="team-bio__text">
+            <h3>Hwiyoung Lee</h3>
+            <div class="team-member__role">PhD Candidate · SP2</div>
+            <p>Hwiyoung Lee is a PhD candidate at the University of Pennsylvania School of Social Policy &amp; Practice. His research focuses on the impact of temperature on labor markets in South Korea.</p>
+          </div>
+          <button class="team-bio__close" onclick="event.stopPropagation();toggleBio('bio-hwiyoung')">&times;</button>
+        </div>
+
+        <div class="team-bio" id="bio-husel" style="position:relative;">
+          <img class="team-bio__img" src="assets/Husel%20Husile.jpg" alt="Husel Husile">
+          <div class="team-bio__text">
+            <h3>Husel Husile</h3>
+            <div class="team-member__role">PhD Candidate · SP2</div>
+            <p>Husel is a PhD candidate at the University of Pennsylvania School of Social Policy &amp; Practice. His research focuses on climate adaptation and social resilience in the Global South. He studies how environmental shocks influence social cohesion and social welfare by using large-scale panel data, demographic surveys, and satellite-based climate indicators.</p>
+          </div>
+          <button class="team-bio__close" onclick="event.stopPropagation();toggleBio('bio-husel')">&times;</button>
+        </div>
+      </div>
+      <h3 style="font-size:1.05rem;margin-bottom:1.5rem;color:var(--accent-bright);font-family:var(--font-sans);text-transform:uppercase;letter-spacing:0.06em;font-weight:600;">Climate Adaptation Fellows</h3>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem;">
+        <div class="fellow"><div class="fellow__name">Angelo dos Santos, PhD</div><div class="fellow__role">Postdoctoral Fellow</div></div>
+        <div class="fellow"><div class="fellow__name">Yabo Vidogbena, PhD</div><div class="fellow__role">Postdoctoral Fellow</div></div>
+        <div class="fellow"><div class="fellow__name">Yujie Zhang, PhD</div><div class="fellow__role">Postdoctoral Fellow</div></div>
+        <div class="fellow"><div class="fellow__name">Chris Wodicka</div><div class="fellow__role">PhD Candidate</div></div>
+        <div class="fellow"><div class="fellow__name">Abishek Nippani</div><div class="fellow__role">Doctoral Student</div></div>
+        <div class="fellow"><div class="fellow__name">Rebecca Pepe</div><div class="fellow__role">PhD Candidate</div></div>
+        <div class="fellow"><div class="fellow__name">Sebastian Prandoni</div><div class="fellow__role">PhD Student</div></div>
+        <div class="fellow"><div class="fellow__name">Heather Do</div><div class="fellow__role">PhD Student</div></div>
+        <div class="fellow"><div class="fellow__name">Mohamad Al-Abbas</div><div class="fellow__role">PhD Candidate</div></div>
+        <div class="fellow"><div class="fellow__name">Nazar Khalid</div><div class="fellow__role">PhD Candidate</div></div>
+        <div class="fellow"><div class="fellow__name">Tingting Rui</div><div class="fellow__role">PhD Candidate</div></div>
+        <div class="fellow"><div class="fellow__name">Angel Bao</div><div class="fellow__role">Graduate Student</div></div>
+        <div class="fellow"><div class="fellow__name">Anicca Liu</div><div class="fellow__role">Fellow</div></div>
+        <div class="fellow"><div class="fellow__name">Lindsay Park</div><div class="fellow__role">Fellow</div></div>
+        <div class="fellow"><div class="fellow__name">Ellery Spikes</div><div class="fellow__role">Undergraduate Fellow</div></div>
+        <div class="fellow"><div class="fellow__name">Ljuben Atov</div><div class="fellow__role">Undergraduate Fellow</div></div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ═══ ENGAGEMENT ═══ -->
+<div class="page" id="page-engagement">
+
+  <section class="work-hero" style="background-image:linear-gradient(135deg,rgba(1,31,91,.75),rgba(1,24,56,.75) 55%,rgba(110,23,23,.75)),url('assets/engagement.png');background-position:center 12%;">
+    <div class="container">
+      <div class="work-hero__copy">
+        <div class="eyebrow">Press &amp; engagement</div>
+        <h1>Coming soon</h1>
+        <p class="lead">Updates from CCR — events, talks, media coverage, and our weekly seminar series — will be posted here soon.</p>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<!-- ═══ GET INVOLVED ═══ -->
+<div class="page" id="page-contact">
+  <div class="ps" style="background-image:linear-gradient(rgba(1,24,56,0.75), rgba(1,24,56,0.78)), url('assets/get-involved.jpg');background-size:cover;background-position:center;background-attachment:fixed;min-height:calc(100vh - 70px);">
+    <div class="container">
+      <div class="divider"></div>
+      <h2>Get involved</h2>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:3rem;margin-top:1rem;">
+        <div>
+          <h3 style="font-size:1.15rem;margin-bottom:0.75rem;font-family:var(--font-sans);">Get in touch</h3>
+          <p style="color:var(--text-secondary);font-family:var(--font-serif);font-size:0.97rem;line-height:1.7;">For inquiries about research collaboration, policy partnerships, or joining the team.</p>
+          <p style="margin-top:1rem;font-family:var(--font-sans);"><a href="mailto:parkcaro@upenn.edu" style="font-weight:600;">parkcaro@upenn.edu</a></p>
+        </div>
+        <div>
+          <h3 style="font-size:1.15rem;margin-bottom:0.75rem;font-family:var(--font-sans);">Support our work</h3>
+          <p style="color:var(--text-secondary);font-family:var(--font-serif);font-size:0.97rem;line-height:1.7;">Gifts to the Center for Climate Resilience support research that directly shapes policy for the communities most exposed to climate risk.</p>
+          <p style="margin-top:1rem;"><a href="https://giving.apps.upenn.edu/fund?program=SSW&fund=630499" target="_blank" rel="noopener" style="display:inline-block;padding:0.65rem 1.5rem;border:1px solid var(--accent);border-radius:6px;color:var(--accent-bright);font-family:var(--font-sans);font-size:0.85rem;font-weight:600;letter-spacing:0.02em;transition:background .2s,color .2s;"
+            onmouseover="this.style.background='var(--accent)';this.style.color='var(--bg)'"
+            onmouseout="this.style.background='transparent';this.style.color='var(--accent-bright)'">Make a gift</a></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
 <!-- ═══ Footer ═══ -->
 <footer class="footer">
   <div class="container">
     <div>&copy; 2026 Center for Climate Resilience &middot; University of Pennsylvania</div>
-    <div><a href="mailto:parkcaro@upenn.edu">parkcaro@upenn.edu</a></div>
   </div>
 </footer>
 
+<script>
+function showPage(page) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  const t = document.getElementById('page-' + page);
+  if (t) t.classList.add('active');
+  document.querySelectorAll('.nav__links a').forEach(a => {
+    a.classList.toggle('active', a.dataset.page === page);
+  });
+  window.scrollTo(0, 0);
+}
+function toggleBio(id) {
+  const bio = document.getElementById(id);
+  const wasActive = bio.classList.contains('active');
+  document.querySelectorAll('.team-bio').forEach(b => b.classList.remove('active'));
+  if (!wasActive) {
+    bio.classList.add('active');
+    bio.scrollIntoView({behavior:'smooth',block:'nearest'});
+  }
+}
+</script>
 </body>
 </html>
