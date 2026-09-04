@@ -66,6 +66,11 @@ h1,h2,h3,h4{font-family:var(--font-sans);font-weight:700;color:var(--text-primar
 .nav__logo{height:38px;width:auto;display:block}
 .nav__name{font-family:var(--font-sans);font-size:1rem;font-weight:600;color:#fff}
 .nav__links{display:flex;gap:2rem;list-style:none}
+.nav__links a{white-space:nowrap}
+@media(max-width:1180px){.nav__links{gap:1.35rem}.nav__name{font-size:.92rem;white-space:nowrap}}
+@media(max-width:1010px){.nav__name{display:none}}
+@media(max-width:900px){.nav__links{gap:1rem}}
+@media(max-width:760px){.nav__links{gap:.8rem;flex-wrap:wrap;justify-content:flex-end}.nav__links a{font-size:.72rem}}
 .nav__links a{color:rgba(255,255,255,0.7);font-size:0.78rem;font-weight:600;letter-spacing:0.05em;text-transform:uppercase;transition:color .2s;cursor:pointer;font-family:var(--font-sans)}
 .nav__links a:hover{color:#fff}
 .nav__links a.active{color:var(--accent-bright)}
@@ -332,6 +337,7 @@ p{margin-bottom:1rem;font-family:var(--font-serif)}
     <li><a onclick="showPage('about')" data-page="about">About</a></li>
     <li><a onclick="showPage('research')" data-page="research">Our Work</a></li>
     <li><a onclick="showPage('team')" data-page="team">Team</a></li>
+    <li><a onclick="showPage('affiliates')" data-page="affiliates">Corporate Affiliates</a></li>
     <li><a onclick="showPage('engagement')" data-page="engagement">Engagement</a></li>
     <li><a onclick="showPage('contact')" data-page="contact">Get Involved</a></li>
   </ul>
@@ -550,6 +556,25 @@ p{margin-bottom:1rem;font-family:var(--font-serif)}
     </div>
   </div>
 
+</div>
+
+<!-- ═══ CORPORATE AFFILIATES ═══ -->
+<div class="page" id="page-affiliates">
+  <div class="ps" style="background-image:linear-gradient(rgba(1,24,56,0.75), rgba(1,24,56,0.78)), url('assets/advisory-board.jpg');background-size:cover;background-position:center;background-attachment:fixed;">
+    <div class="container">
+      <div class="divider"></div>
+      <h2>Corporate Affiliates Program</h2>
+      <p class="lead" style="margin-bottom:2.5rem;">We're building a membership program that connects companies with CCR's research on how climate risk affects workers, operations, and assets.</p>
+      <div style="background:var(--bg-card);border:1px solid var(--border-light);border-radius:10px;padding:2.5rem;max-width:680px;">
+        <h3 style="font-size:1.1rem;margin-bottom:1rem;color:var(--accent-bright);font-family:var(--font-sans);text-transform:uppercase;letter-spacing:0.06em;font-weight:600;">Coming soon</h3>
+        <p style="color:var(--text-secondary);font-family:var(--font-serif);font-size:0.97rem;line-height:1.7;">Member companies will meet with CCR researchers at convenings held under the Chatham House Rule, where findings and open questions can be discussed candidly across sectors. Membership also includes scoping analysis of climate exposure drawn from public data.</p>
+        <p style="color:var(--text-secondary);font-family:var(--font-serif);font-size:0.97rem;line-height:1.7;">We're finalizing the structure of the program over the coming months. If your organization is interested in taking part as we build it, we'd love to hear from you.</p>
+        <p style="margin-top:1.5rem;margin-bottom:0;"><a href="mailto:parkcaro@upenn.edu" style="display:inline-block;padding:0.65rem 1.5rem;border:1px solid var(--accent);border-radius:6px;color:var(--accent-bright);font-family:var(--font-sans);font-size:0.85rem;font-weight:600;letter-spacing:0.02em;transition:background .2s,color .2s;"
+          onmouseover="this.style.background='var(--accent)';this.style.color='var(--bg)'"
+          onmouseout="this.style.background='transparent';this.style.color='var(--accent-bright)'">Get in touch</a></p>
+      </div>
+    </div>
+  </div>
 </div>
 
 <!-- ═══ ENGAGEMENT ═══ -->
