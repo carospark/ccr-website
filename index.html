@@ -160,13 +160,13 @@ p{margin-bottom:1rem;font-family:var(--font-serif)}
 .team-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:2rem}
 @media(min-width:860px){#core-team{grid-template-columns:repeat(3,minmax(0,1fr));max-width:720px;margin-left:auto;margin-right:auto;gap:2.5rem 1.5rem}}
 .topics-label{font-family:var(--font-sans);font-size:.72rem;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--accent-bright);margin-bottom:.9rem}
-.hazard-row{display:flex;flex-wrap:wrap;gap:.7rem;margin-bottom:2.75rem}
+.hazard-row{display:flex;flex-wrap:wrap;gap:.7rem;margin-bottom:2.5rem}
 .hazard{padding:.5rem 1.15rem;border:1px solid var(--accent);border-radius:999px;font-family:var(--font-sans);font-size:.86rem;font-weight:600;color:var(--text-primary)}
-.topic-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:1rem;margin-bottom:2.75rem}
-.topic-grid--two{grid-template-columns:repeat(auto-fit,minmax(210px,1fr));max-width:calc(66.66% - .33rem);margin-bottom:0}
+.topic-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:1rem}
+@media(max-width:1080px){.topic-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(max-width:720px){.topic-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:440px){.topic-grid{grid-template-columns:1fr}}
 .topic{padding:1.15rem 1.3rem;background:var(--bg-card);border:1px solid var(--border-light);border-radius:8px;font-family:var(--font-sans);font-weight:500;font-size:.95rem;line-height:1.35}
-.topic--apply{background:transparent;border-left:3px solid var(--terra);border-radius:0 8px 8px 0}
-@media(max-width:760px){.topic-grid--two{max-width:none}}
 .team-member{text-align:center;cursor:pointer}
 .team-member__photo{width:120px;height:120px;border-radius:50%;background:var(--bg-card);margin:0 auto 1rem;border:2px solid var(--border-light);display:flex;align-items:center;justify-content:center;color:var(--text-secondary);font-family:var(--font-sans);font-size:1.4rem;font-weight:600;transition:border-color .25s}
 .team-member:hover .team-member__photo{border-color:var(--accent)}
@@ -446,17 +446,13 @@ p{margin-bottom:1rem;font-family:var(--font-serif)}
         <div class="hazard">Air Pollution</div>
       </div>
 
-      <div class="topics-label">And their effects on</div>
+      <div class="topics-label">Impacts</div>
       <div class="topic-grid">
         <div class="topic">Workers &amp; Working Conditions</div>
         <div class="topic">Learning &amp; Human Capital</div>
         <div class="topic">Housing Affordability &amp; Access</div>
-      </div>
-
-      <div class="topics-label">Implemented through</div>
-      <div class="topic-grid topic-grid--two">
-        <div class="topic topic--apply">Adaptation &amp; Resilience Policy</div>
-        <div class="topic topic--apply">Corporate / Firm Risk &amp; Resilience</div>
+        <div class="topic">Adaptation &amp; Resilience Policy</div>
+        <div class="topic">Corporate / Firm Risk &amp; Resilience</div>
       </div>
     </div>
   </section>
