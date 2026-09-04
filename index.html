@@ -158,7 +158,9 @@ p{margin-bottom:1rem;font-family:var(--font-serif)}
 
 /* ── Team ── */
 .team-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:2rem}
-@media(min-width:860px){#core-team{grid-template-columns:repeat(12,1fr)}#core-team>.team-member{grid-column:span 4}}
+@media(min-width:860px){#core-team{grid-template-columns:repeat(3,minmax(0,1fr));max-width:720px;margin-left:auto;margin-right:auto;gap:2.5rem 1.5rem}}
+.topic-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem;margin-top:2.5rem}
+.topic{padding:1.1rem 1.25rem;background:var(--bg-card);border:1px solid var(--border-light);border-radius:8px;font-family:var(--font-sans);font-weight:500;font-size:.95rem;line-height:1.35}
 .team-member{text-align:center;cursor:pointer}
 .team-member__photo{width:120px;height:120px;border-radius:50%;background:var(--bg-card);margin:0 auto 1rem;border:2px solid var(--border-light);display:flex;align-items:center;justify-content:center;color:var(--text-secondary);font-family:var(--font-sans);font-size:1.4rem;font-weight:600;transition:border-color .25s}
 .team-member:hover .team-member__photo{border-color:var(--accent)}
@@ -428,6 +430,17 @@ p{margin-bottom:1rem;font-family:var(--font-serif)}
           <p>We partner with governments, nonprofits, businesses, and communities to support better resilience decisions.</p>
         </article>
       </div>
+
+      <h3 style="font-size:1.05rem;margin-top:4.5rem;margin-bottom:0;color:var(--accent-bright);font-family:var(--font-sans);text-transform:uppercase;letter-spacing:0.06em;font-weight:600;">Research topics</h3>
+      <div class="topic-grid">
+        <div class="topic">Workers &amp; Working Conditions</div>
+        <div class="topic">Learning &amp; Human Capital</div>
+        <div class="topic">Housing Affordability &amp; Access</div>
+        <div class="topic">Extreme Heat</div>
+        <div class="topic">Wildfires &amp; Air Pollution</div>
+        <div class="topic">Adaptation &amp; Resilience Policy</div>
+        <div class="topic">Corporate / Firm Risk &amp; Resilience</div>
+      </div>
     </div>
   </section>
 
@@ -441,13 +454,15 @@ p{margin-bottom:1rem;font-family:var(--font-serif)}
       <h2>Team</h2>
       <p class="lead" style="margin-bottom:3rem;">A multidisciplinary team bridging climate science, economics, public health, and urban policy.</p>
       <h3 style="font-size:1.05rem;margin-bottom:1.5rem;color:var(--accent-bright);font-family:var(--font-sans);text-transform:uppercase;letter-spacing:0.06em;font-weight:600;">Core team</h3>
-      <div class="team-grid" style="margin-bottom:5rem;" id="core-team">
+      <div class="team-grid" style="margin-bottom:2rem;" id="core-team">
         <div class="team-member" onclick="toggleBio('bio-jisung')"><div class="team-member__photo" style="background:url('assets/JisungParkHeadshot-02.jpg') center/cover;color:transparent;">JP</div><h3>Jisung Park</h3><div class="team-member__role">Director</div></div>
         <div class="team-member" onclick="toggleBio('bio-paul')"><div class="team-member__photo" style="background:url('assets/Paul%20Stainier.jpg') center/cover;color:transparent;">PS</div><h3>Paul Stainier</h3><div class="team-member__role">Lead, Labor Markets Research</div></div>
         <div class="team-member" onclick="toggleBio('bio-ina')"><div class="team-member__photo" style="background:url('assets/Ina-Drouven.jpg') center/cover;color:transparent;">ID</div><h3>Ina Drouven</h3><div class="team-member__role">Lead, Corporate Resilience Research</div></div>
         <div class="team-member" onclick="toggleBio('bio-hwiyoung')"><div class="team-member__photo" style="background:url('assets/Hwiyoung.jpg') center/cover;color:transparent;">HL</div><h3>Hwiyoung Lee</h3><div class="team-member__role">PhD Candidate</div></div>
         <div class="team-member" onclick="toggleBio('bio-husel')"><div class="team-member__photo" style="background:url('assets/Husel%20Husile.jpg') center/cover;color:transparent;">HH</div><h3>Husel Husile</h3><div class="team-member__role">PhD Candidate</div></div>
         <div class="team-member" onclick="toggleBio('bio-katherine')"><div class="team-member__photo" style="background:url('assets/Katherine-Wu.jpg') center/cover;color:transparent;">KW</div><h3>Katherine Wu</h3><div class="team-member__role">Research Assistant</div></div>
+      </div>
+      <div class="team-bios" style="margin-bottom:3rem;">
 
         <div class="team-bio" id="bio-jisung" style="position:relative;">
           <img class="team-bio__img" src="assets/JisungParkHeadshot-02.jpg" alt="Jisung Park">
