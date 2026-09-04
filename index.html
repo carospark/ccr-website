@@ -158,6 +158,7 @@ p{margin-bottom:1rem;font-family:var(--font-serif)}
 
 /* ── Team ── */
 .team-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:2rem}
+@media(min-width:860px){#core-team{grid-template-columns:repeat(12,1fr)}#core-team>.team-member{grid-column:span 4}}
 .team-member{text-align:center;cursor:pointer}
 .team-member__photo{width:120px;height:120px;border-radius:50%;background:var(--bg-card);margin:0 auto 1rem;border:2px solid var(--border-light);display:flex;align-items:center;justify-content:center;color:var(--text-secondary);font-family:var(--font-sans);font-size:1.4rem;font-weight:600;transition:border-color .25s}
 .team-member:hover .team-member__photo{border-color:var(--accent)}
@@ -442,10 +443,11 @@ p{margin-bottom:1rem;font-family:var(--font-serif)}
       <h3 style="font-size:1.05rem;margin-bottom:1.5rem;color:var(--accent-bright);font-family:var(--font-sans);text-transform:uppercase;letter-spacing:0.06em;font-weight:600;">Core team</h3>
       <div class="team-grid" style="margin-bottom:5rem;" id="core-team">
         <div class="team-member" onclick="toggleBio('bio-jisung')"><div class="team-member__photo" style="background:url('assets/JisungParkHeadshot-02.jpg') center/cover;color:transparent;">JP</div><h3>Jisung Park</h3><div class="team-member__role">Director</div></div>
-        <div class="team-member" onclick="toggleBio('bio-caro')"><div class="team-member__photo" style="background:url('assets/Caro%20Park.jpeg') center/cover;color:transparent;">CP</div><h3>Caro Park</h3><div class="team-member__role">Deputy Director</div></div>
         <div class="team-member" onclick="toggleBio('bio-paul')"><div class="team-member__photo" style="background:url('assets/Paul%20Stainier.jpg') center/cover;color:transparent;">PS</div><h3>Paul Stainier</h3><div class="team-member__role">Lead, Labor Markets Research</div></div>
+        <div class="team-member" onclick="toggleBio('bio-ina')"><div class="team-member__photo" style="background:url('assets/Ina-Drouven.jpg') center/cover;color:transparent;">ID</div><h3>Ina Drouven</h3><div class="team-member__role">Lead, Corporate Resilience Research</div></div>
         <div class="team-member" onclick="toggleBio('bio-hwiyoung')"><div class="team-member__photo" style="background:url('assets/Hwiyoung.jpg') center/cover;color:transparent;">HL</div><h3>Hwiyoung Lee</h3><div class="team-member__role">PhD Candidate</div></div>
         <div class="team-member" onclick="toggleBio('bio-husel')"><div class="team-member__photo" style="background:url('assets/Husel%20Husile.jpg') center/cover;color:transparent;">HH</div><h3>Husel Husile</h3><div class="team-member__role">PhD Candidate</div></div>
+        <div class="team-member" onclick="toggleBio('bio-katherine')"><div class="team-member__photo" style="background:url('assets/Katherine-Wu.jpg') center/cover;color:transparent;">KW</div><h3>Katherine Wu</h3><div class="team-member__role">Research Assistant</div></div>
 
         <div class="team-bio" id="bio-jisung" style="position:relative;">
           <img class="team-bio__img" src="assets/JisungParkHeadshot-02.jpg" alt="Jisung Park">
@@ -459,17 +461,6 @@ p{margin-bottom:1rem;font-family:var(--font-serif)}
           <button class="team-bio__close" onclick="event.stopPropagation();toggleBio('bio-jisung')">&times;</button>
         </div>
 
-        <div class="team-bio" id="bio-caro" style="position:relative;">
-          <img class="team-bio__img" src="assets/Caro%20Park.jpeg" alt="Caro Park">
-          <div class="team-bio__text">
-            <h3>Caro Park, PhD</h3>
-            <div class="team-member__role">Deputy Director</div>
-            <p>Caro is the Deputy Director of the Center for Climate Resilience. She is an applied climate scientist whose research spans climate variability, agricultural systems, and population health outcomes. She has experience working with climate-exposed and resource-constrained communities across Sub-Saharan Africa, Southeast Asia, and Australia.</p>
-            <p>She holds a PhD in Population Health Sciences from Harvard University, where she went on to conduct postdoctoral research in the Department of Earth and Planetary Sciences. She was previously a Fulbright Public Policy Fellow at the University of Melbourne.</p>
-          </div>
-          <button class="team-bio__close" onclick="event.stopPropagation();toggleBio('bio-caro')">&times;</button>
-        </div>
-
         <div class="team-bio" id="bio-paul" style="position:relative;">
           <img class="team-bio__img" src="assets/Paul%20Stainier.jpg" alt="Paul Stainier">
           <div class="team-bio__text">
@@ -479,6 +470,17 @@ p{margin-bottom:1rem;font-family:var(--font-serif)}
             <p>He holds a PhD in Environment and Sustainability from the University of California, Los Angeles.</p>
           </div>
           <button class="team-bio__close" onclick="event.stopPropagation();toggleBio('bio-paul')">&times;</button>
+        </div>
+
+        <div class="team-bio" id="bio-ina" style="position:relative;">
+          <img class="team-bio__img" src="assets/Ina-Drouven.jpg" alt="Ina Drouven">
+          <div class="team-bio__text">
+            <h3>Ina Drouven, PhD</h3>
+            <div class="team-member__role">Lead, Corporate Resilience Research</div>
+            <p>Ina is an environmental economist and leads corporate resilience research at the Center for Climate Resilience. Her research examines how extreme weather events, physical climate risks, and climate uncertainty shape economic outcomes, with a focus on corporate resilience. Her work combines advanced econometrics, large-scale data and spatial methods with theoretical modelling informed by stochastic calculus and real-option theory.</p>
+            <p>She holds a PhD in Environmental Economics from the London School of Economics, a Master in Public Policy from UCLA, and an undergraduate degree in Economics from the University of Cambridge.</p>
+          </div>
+          <button class="team-bio__close" onclick="event.stopPropagation();toggleBio('bio-ina')">&times;</button>
         </div>
 
         <div class="team-bio" id="bio-hwiyoung" style="position:relative;">
@@ -500,8 +502,18 @@ p{margin-bottom:1rem;font-family:var(--font-serif)}
           </div>
           <button class="team-bio__close" onclick="event.stopPropagation();toggleBio('bio-husel')">&times;</button>
         </div>
+
+        <div class="team-bio" id="bio-katherine" style="position:relative;">
+          <img class="team-bio__img" src="assets/Katherine-Wu.jpg" alt="Katherine Wu">
+          <div class="team-bio__text">
+            <h3>Katherine Wu</h3>
+            <div class="team-member__role">Research Assistant &middot; Wharton</div>
+            <p>Katherine is a junior studying Finance and Statistics at the Wharton School of the University of Pennsylvania. She is interested in infrastructure investing and exploring how private capital can strengthen climate resilience and create social impact.</p>
+          </div>
+          <button class="team-bio__close" onclick="event.stopPropagation();toggleBio('bio-katherine')">&times;</button>
+        </div>
       </div>
-      <h3 style="font-size:1.05rem;margin-bottom:1.5rem;color:var(--accent-bright);font-family:var(--font-sans);text-transform:uppercase;letter-spacing:0.06em;font-weight:600;">Climate Adaptation Fellows</h3>
+      <h3 style="font-size:1.05rem;margin-bottom:1.5rem;color:var(--accent-bright);font-family:var(--font-sans);text-transform:uppercase;letter-spacing:0.06em;font-weight:600;">Research in Climate Adaptation and Resilience (RCAR) Members</h3>
       <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem;">
         <div class="fellow"><div class="fellow__name">Angelo dos Santos, PhD</div><div class="fellow__role">Postdoctoral Fellow</div></div>
         <div class="fellow"><div class="fellow__name">Yabo Vidogbena, PhD</div><div class="fellow__role">Postdoctoral Fellow</div></div>
