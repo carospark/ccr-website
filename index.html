@@ -158,7 +158,7 @@ p{margin-bottom:1rem;font-family:var(--font-serif)}
 
 /* ── Team ── */
 .team-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:2rem}
-@media(min-width:860px){#core-team{grid-template-columns:repeat(3,minmax(0,1fr));max-width:720px;margin-left:auto;margin-right:auto;gap:2.5rem 1.5rem}}
+@media(min-width:860px){#core-team{grid-template-columns:repeat(4,minmax(0,1fr));max-width:960px;margin-left:auto;margin-right:auto;gap:2.5rem 1.5rem}}
 .topics-label{font-family:var(--font-sans);font-size:.72rem;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--accent-bright);margin-bottom:.9rem}
 .hazard-row{display:flex;flex-wrap:wrap;gap:.7rem;margin-bottom:2.5rem}
 .hazard{padding:.5rem 1.15rem;border:1px solid var(--accent);border-radius:999px;font-family:var(--font-sans);font-size:.86rem;font-weight:600;color:var(--text-primary)}
@@ -468,17 +468,19 @@ p{margin-bottom:1rem;font-family:var(--font-serif)}
       <p class="lead" style="margin-bottom:3rem;">A multidisciplinary team bridging climate science, economics, public health, and urban policy.</p>
       <h3 style="font-size:1.05rem;margin-bottom:1.5rem;color:var(--accent-bright);font-family:var(--font-sans);text-transform:uppercase;letter-spacing:0.06em;font-weight:600;">Core team</h3>
       <div class="team-grid" style="margin-bottom:2rem;" id="core-team">
-        <div class="team-member" onclick="toggleBio('bio-jisung')"><div class="team-member__photo" style="background:url('assets/JisungParkHeadshot-02.jpg') center/cover;color:transparent;">JP</div><h3>Jisung Park</h3><div class="team-member__role">Director</div></div>
+        <div class="team-member" onclick="toggleBio('bio-jisung')"><div class="team-member__photo" style="background:url('assets/JisungParkHeadshot-02.jpg') center 20%/cover;color:transparent;">JP</div><h3>Jisung Park</h3><div class="team-member__role">Director</div></div>
         <div class="team-member" onclick="toggleBio('bio-paul')"><div class="team-member__photo" style="background:url('assets/Paul%20Stainier.jpg') center/cover;color:transparent;">PS</div><h3>Paul Stainier</h3><div class="team-member__role">Lead, Labor Markets Research</div></div>
         <div class="team-member" onclick="toggleBio('bio-ina')"><div class="team-member__photo" style="background:url('assets/Ina-Drouven.jpg') center/cover;color:transparent;">ID</div><h3>Ina Drouven</h3><div class="team-member__role">Non-Resident Fellow</div></div>
+        <div class="team-member" onclick="toggleBio('bio-patrick')"><div class="team-member__photo" style="background:url('assets/Patrick-Behrer.jpg') center/cover;color:transparent;">PB</div><h3>Patrick Behrer</h3><div class="team-member__role">Contributing Economist</div></div>
         <div class="team-member" onclick="toggleBio('bio-hwiyoung')"><div class="team-member__photo" style="background:url('assets/Hwiyoung.jpg') center/cover;color:transparent;">HL</div><h3>Hwiyoung Lee</h3><div class="team-member__role">PhD Candidate</div></div>
         <div class="team-member" onclick="toggleBio('bio-husel')"><div class="team-member__photo" style="background:url('assets/Husel%20Husile.jpg') center/cover;color:transparent;">HH</div><h3>Husel Husile</h3><div class="team-member__role">PhD Candidate</div></div>
+        <div class="team-member" onclick="toggleBio('bio-angelo')"><div class="team-member__photo" style="background:url('assets/Angelo-dos-Santos.jpg') center/cover;color:transparent;">AS</div><h3>Angelo dos Santos</h3><div class="team-member__role">R-CAR Chairperson</div></div>
         <div class="team-member" onclick="toggleBio('bio-katherine')"><div class="team-member__photo" style="background:url('assets/Katherine-Wu.jpg') center/cover;color:transparent;">KW</div><h3>Katherine Wu</h3><div class="team-member__role">Research Assistant</div></div>
       </div>
       <div class="team-bios" style="margin-bottom:3rem;">
 
         <div class="team-bio" id="bio-jisung" style="position:relative;">
-          <img class="team-bio__img" src="assets/JisungParkHeadshot-02.jpg" alt="Jisung Park">
+          <img class="team-bio__img" src="assets/JisungParkHeadshot-02.jpg" alt="Jisung Park" style="object-position:50% 20%;">
           <div class="team-bio__text">
             <h3>R. Jisung Park, PhD</h3>
             <div class="team-member__role">Director · SP2 · Wharton</div>
@@ -511,6 +513,17 @@ p{margin-bottom:1rem;font-family:var(--font-serif)}
           <button class="team-bio__close" onclick="event.stopPropagation();toggleBio('bio-ina')">&times;</button>
         </div>
 
+        <div class="team-bio" id="bio-patrick" style="position:relative;">
+          <img class="team-bio__img" src="assets/Patrick-Behrer.jpg" alt="Patrick Behrer">
+          <div class="team-bio__text">
+            <h3>Patrick Behrer, PhD</h3>
+            <div class="team-member__role">Contributing Economist · World Bank</div>
+            <p>Patrick Behrer is an Economist in the Development Economics Research Group at the World Bank. His research focuses on the economic causes and consequences of air pollution and climate change around the world, with a particular focus on how to encourage adaptation to climate change and air pollution exposure.</p>
+            <p>He holds a PhD in Public Policy from Harvard University. Prior to joining the World Bank he was a postdoctoral fellow at Stanford's Center on Food Security and the Environment and a Fulbright Fellow in New Zealand.</p>
+          </div>
+          <button class="team-bio__close" onclick="event.stopPropagation();toggleBio('bio-patrick')">&times;</button>
+        </div>
+
         <div class="team-bio" id="bio-hwiyoung" style="position:relative;">
           <img class="team-bio__img" src="assets/Hwiyoung.jpg" alt="Hwiyoung Lee">
           <div class="team-bio__text">
@@ -531,6 +544,17 @@ p{margin-bottom:1rem;font-family:var(--font-serif)}
           <button class="team-bio__close" onclick="event.stopPropagation();toggleBio('bio-husel')">&times;</button>
         </div>
 
+        <div class="team-bio" id="bio-angelo" style="position:relative;">
+          <img class="team-bio__img" src="assets/Angelo-dos-Santos.jpg" alt="Angelo dos Santos">
+          <div class="team-bio__text">
+            <h3>Angelo dos Santos, PhD</h3>
+            <div class="team-member__role">R-CAR Chairperson · Postdoctoral Fellow · SP2</div>
+            <p>Angelo dos Santos is a Postdoctoral Fellow at the University of Pennsylvania and Scientific Production Coordinator for the DZC project. He is an applied microeconomist working on development and environmental economics.</p>
+            <p>His research addresses issues such as deforestation and air pollution, with the aim of developing effective policies to mitigate these challenges. He received his PhD from the University of Houston.</p>
+          </div>
+          <button class="team-bio__close" onclick="event.stopPropagation();toggleBio('bio-angelo')">&times;</button>
+        </div>
+
         <div class="team-bio" id="bio-katherine" style="position:relative;">
           <img class="team-bio__img" src="assets/Katherine-Wu.jpg" alt="Katherine Wu">
           <div class="team-bio__text">
@@ -541,9 +565,8 @@ p{margin-bottom:1rem;font-family:var(--font-serif)}
           <button class="team-bio__close" onclick="event.stopPropagation();toggleBio('bio-katherine')">&times;</button>
         </div>
       </div>
-      <h3 style="font-size:1.05rem;margin-bottom:1.5rem;color:var(--accent-bright);font-family:var(--font-sans);text-transform:uppercase;letter-spacing:0.06em;font-weight:600;">Research in Climate Adaptation and Resilience (RCAR) Members</h3>
+      <h3 style="font-size:1.05rem;margin-bottom:1.5rem;color:var(--accent-bright);font-family:var(--font-sans);text-transform:uppercase;letter-spacing:0.06em;font-weight:600;">Research in Climate Adaptation and Resilience (R-CAR) Members</h3>
       <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem;">
-        <div class="fellow"><div class="fellow__name">Angelo dos Santos, PhD</div><div class="fellow__role">Postdoctoral Fellow</div></div>
         <div class="fellow"><div class="fellow__name">Yabo Vidogbena, PhD</div><div class="fellow__role">Postdoctoral Fellow</div></div>
         <div class="fellow"><div class="fellow__name">Yujie Zhang, PhD</div><div class="fellow__role">Postdoctoral Fellow</div></div>
         <div class="fellow"><div class="fellow__name">Chris Wodicka</div><div class="fellow__role">PhD Candidate</div></div>
